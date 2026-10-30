@@ -3,456 +3,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A student project exploring Germany 4.0, Industrie 4.0, smart factories, and German language and culture.">
-<title>Germany 4.0 | The Smart Revolution</title>
+<meta name="theme-color" content="#1d2022">
+<meta name="description" content="A student-friendly guide to Germany 4.0: Industrie 4.0, intelligent factories, AI, digital production, sustainability, skills and German vocabulary.">
+<title>Germany 4.0 — The Smart Revolution</title>
 <style>
-  :root {
-    --black: #202020;
-    --red: #b72e35;
-    --gold: #e4b64b;
-    --cream: #f7f1e5;
-    --paper: #fffdf8;
-    --green: #536b53;
-    --muted: #68645d;
-    --line: #e5dccb;
-    --shadow: 0 14px 35px rgba(32, 32, 32, .09);
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; color: var(--black); background: var(--cream); font-family: Georgia, "Times New Roman", serif; line-height: 1.65; }
-  h1, h2, h3, nav, button, .eyebrow, .tag, .metric, .word, .small { font-family: Arial, Helvetica, sans-serif; }
-  h1, h2, h3 { line-height: 1.12; }
-  h2 { font-size: clamp(2rem, 4vw, 3.1rem); margin: 0 0 1rem; letter-spacing: -.04em; }
-  h3 { margin-top: 0; }
-  p { margin-top: 0; }
-  a { color: inherit; }
-  .wrap { width: min(1120px, 92%); margin: 0 auto; }
-  .topbar { background: var(--black); color: white; font: 700 .75rem Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; padding: .55rem 0; }
-  .flag { display: inline-flex; width: 54px; height: 30px; flex-direction: column; overflow: hidden; border-radius: 3px; box-shadow: 0 2px 7px #0002; vertical-align: middle; }
-  .flag span { flex: 1; }
-  .flag .fblack { background: #1d1d1d; } .flag .fred { background: #c8343d; } .flag .fgold { background: #efc34c; }
-  header { position: sticky; top: 0; z-index: 10; background: rgba(255,253,248,.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  .nav { min-height: 76px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-  .brand { display: flex; gap: .8rem; align-items: center; font: 800 1rem Arial, sans-serif; letter-spacing: -.03em; text-decoration: none; }
-  .brand small { display: block; font-size: .66rem; color: var(--muted); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-  nav { display: flex; gap: 1.1rem; align-items: center; font-size: .82rem; font-weight: 700; }
-  nav a { text-decoration: none; color: #46413b; } nav a:hover { color: var(--red); }
-  .menu-toggle { display: none; border: 1px solid var(--line); background: var(--paper); padding: .5rem .7rem; border-radius: 8px; font-weight: 700; }
-  .hero { position: relative; overflow: hidden; padding: clamp(4rem, 9vw, 8rem) 0 5rem; background: var(--paper); }
-  .hero:after { content: ""; position: absolute; right: -90px; top: -150px; width: 430px; height: 430px; border: 1px solid #e6d9c2; border-radius: 50%; box-shadow: 0 0 0 45px #f7f1e5, 0 0 0 90px #fbf6ec; pointer-events: none; }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
-  .eyebrow { color: var(--red); text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; font-weight: 800; margin-bottom: 1rem; }
-  .hero h1 { font-size: clamp(3.4rem, 8vw, 6.8rem); letter-spacing: -.075em; margin: 0 0 1.3rem; }
-  .hero h1 em { color: var(--red); font-style: normal; }
-  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 590px; }
-  .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
-  .btn { display: inline-flex; justify-content: center; align-items: center; border: 0; padding: .85rem 1.2rem; border-radius: 7px; background: var(--red); color: white; font: 700 .88rem Arial, sans-serif; text-decoration: none; cursor: pointer; transition: transform .2s, background .2s; }
-  .btn:hover { transform: translateY(-2px); background: #8f2028; }
-  .btn.secondary { background: transparent; color: var(--black); border: 1px solid var(--line); }
-  .hero-art { background: #e8dfcd; border-radius: 48% 48% 10px 10px; overflow: hidden; min-height: 370px; position: relative; box-shadow: var(--shadow); }
-  .hero-art img { width: 100%; height: 100%; min-height: 370px; object-fit: cover; display: block; mix-blend-mode: multiply; }
-  .hero-stamp { position: absolute; bottom: 20px; left: 20px; background: var(--paper); padding: 1rem 1.2rem; border-left: 5px solid var(--gold); box-shadow: var(--shadow); font: 800 .8rem Arial,sans-serif; }
-  .hero-stamp span { display: block; color: var(--muted); font-weight: 500; margin-top: .25rem; }
-  .section { padding: clamp(4rem, 7vw, 6.5rem) 0; }
-  .section.white { background: var(--paper); }
-  .section.dark { background: var(--black); color: white; }
-  .section.dark .muted { color: #c9c1b5; }
-  .section-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
-  .section-intro p { max-width: 500px; color: var(--muted); margin-bottom: .25rem; }
-  .tag { display: inline-block; padding: .35rem .65rem; background: #efe3cb; color: #66502b; border-radius: 999px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-  .card { padding: 1.5rem; border: 1px solid var(--line); background: var(--paper); border-radius: 12px; box-shadow: 0 4px 16px #00000006; }
-  .card .number { color: var(--red); font: 800 .78rem Arial,sans-serif; letter-spacing: .12em; margin-bottom: .9rem; }
-  .card p { color: var(--muted); margin-bottom: 0; }
-  .dark .card { background: #292929; border-color: #444; }
-  .dark .card p { color: #d1cbc2; }
-  .dark .card .number { color: var(--gold); }
-  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-top: 2rem; }
-  .era { border-top: 4px solid var(--line); padding: 1.2rem 1rem; background: var(--paper); }
-  .era:nth-child(1) { border-color: #8d8170; } .era:nth-child(2) { border-color: var(--gold); } .era:nth-child(3) { border-color: var(--red); } .era:nth-child(4) { border-color: var(--green); }
-  .era strong { display: block; font: 800 1rem Arial,sans-serif; margin-bottom: .35rem; }
-  .era p { font-size: .92rem; color: var(--muted); margin: 0; }
-  .split { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3rem; align-items: start; }
-  .list { list-style: none; padding: 0; margin: 0; }
-  .list li { border-bottom: 1px solid var(--line); padding: 1rem 0; display: grid; grid-template-columns: 42px 1fr; gap: .8rem; }
-  .list li:last-child { border-bottom: 0; }
-  .list .icon { width: 38px; height: 38px; display: grid; place-items: center; background: #f2e7d2; border-radius: 50%; }
-  .list strong { font-family: Arial,sans-serif; display: block; margin-bottom: .2rem; }
-  .list span { color: var(--muted); font-size: .94rem; }
-  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
-  .metric { border-left: 3px solid var(--gold); padding: .4rem 1rem; }
-  .metric b { display: block; font-size: 1.35rem; color: var(--gold); }
-  .metric span { font-size: .78rem; color: #d2cbc0; }
-  .gallery { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 200px 200px; gap: .8rem; }
-  .gallery figure { margin: 0; position: relative; overflow: hidden; border-radius: 10px; background: #e9dfce; }
-  .gallery figure:first-child { grid-row: span 2; }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
-  .gallery figure:hover img { transform: scale(1.04); }
-  .gallery figcaption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem .9rem .8rem; color: white; font: 700 .8rem Arial,sans-serif; background: linear-gradient(transparent, #000b); }
-  .gallery-note { font-size: .78rem; color: var(--muted); margin-top: .8rem; }
-  .word-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
-  .word { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
-  .word b { display: block; color: var(--red); font-size: 1.05rem; }
-  .word span { color: var(--muted); font-size: .86rem; }
-  .phrase-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
-  .phrase { display: flex; justify-content: space-between; gap: .8rem; align-items: center; padding: 1rem; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); }
-  .phrase strong { display: block; color: var(--red); font-family: Arial,sans-serif; }
-  .phrase small { color: var(--muted); }
-  .speak { border: 1px solid var(--line); background: #f7f1e5; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1rem; flex: 0 0 auto; }
-  .quiz-box { background: var(--paper); color: var(--black); border-radius: 14px; padding: clamp(1.4rem, 4vw, 2.5rem); max-width: 760px; box-shadow: var(--shadow); }
-  .quiz-question { font: 800 1.3rem Arial,sans-serif; margin: .5rem 0 1rem; }
-  .answers { display: grid; grid-template-columns: repeat(2, 1fr); gap: .65rem; }
-  .answer { border: 1px solid var(--line); border-radius: 8px; padding: .85rem; background: white; text-align: left; cursor: pointer; font: 600 .9rem Arial,sans-serif; }
-  .answer:hover { border-color: var(--red); }
-  .answer.correct { background: #e5f0e5; border-color: #5c855e; }
-  .answer.wrong { background: #f8e4e3; border-color: var(--red); }
-  .quiz-feedback { margin: 1rem 0; color: var(--muted); min-height: 1.5rem; }
-  .quiz-controls { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-top: 1rem; }
-  .quiz-count { font: 700 .8rem Arial,sans-serif; color: var(--muted); }
-  .about-box { background: #efe4d0; padding: 2rem; border-radius: 12px; border: 1px solid #e1d2b7; }
-  footer { background: var(--black); color: #eee6da; padding: 2rem 0; font: .8rem Arial,sans-serif; }
-  footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .small { font-size: .78rem; color: var(--muted); }
-  @media (max-width: 850px) {
-    nav { display: none; position: absolute; top: 76px; left: 0; right: 0; background: var(--paper); padding: 1rem 4%; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; }
-    nav.open { display: flex; }
-    .menu-toggle { display: block; }
-    .hero-grid, .split { grid-template-columns: 1fr; }
-    .hero-art { min-height: 300px; }
-    .hero-art img { min-height: 300px; }
-    .grid-3 { grid-template-columns: 1fr 1fr; }
-    .timeline { grid-template-columns: 1fr 1fr; }
-    .word-grid { grid-template-columns: 1fr 1fr; }
-    .section-intro { display: block; }
-  }
-  @media (max-width: 560px) {
-    .grid-3, .metrics, .phrase-list, .answers { grid-template-columns: 1fr; }
-    .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 150px 150px; }
-    .gallery figure:first-child { grid-column: span 2; grid-row: auto; }
-    .timeline { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 3.4rem; }
-    .phrase { align-items: flex-start; }
-  }
+:root{--ink:#202225;--dark:#181a1c;--red:#bd2935;--gold:#e7bd58;--cream:#f5f0e6;--paper:#fffdf8;--muted:#6c6a66;--line:#e4dac8;--green:#56745f;--blue:#dce9ed;--shadow:0 18px 50px rgba(30,27,21,.11);--radius:22px;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;color:var(--ink);background:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}img{max-width:100%;display:block}a{color:inherit}button{font:inherit}.wrap{width:min(var(--max),92%);margin-inline:auto}.topline{height:7px;background:linear-gradient(90deg,#1f2022 0 33.33%,var(--red) 33.33% 66.66%,var(--gold) 66.66%)}
+header{position:sticky;top:0;z-index:20;background:rgba(255,253,248,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;font-weight:850;line-height:1.05;letter-spacing:-.04em}.brand-text small{display:block;margin-top:.36rem;color:var(--muted);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}.flag{height:25px;width:39px;border-radius:4px;overflow:hidden;box-shadow:0 2px 6px #0002;flex-shrink:0}.flag span{display:block;height:33.333%}.flag span:nth-child(1){background:#202020}.flag span:nth-child(2){background:#c82934}.flag span:nth-child(3){background:#efc24f}nav{display:flex;align-items:center;gap:1.05rem;font-size:.78rem;font-weight:750}nav a{text-decoration:none;color:#55514b;transition:color .2s}nav a:hover,nav a:focus-visible{color:var(--red)}.nav-cta{padding:.65rem .9rem;border-radius:10px;color:white;background:var(--ink)}.menu-toggle{display:none;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.55rem .75rem;font-weight:750}
+.hero{padding:clamp(3.5rem,8vw,7.5rem) 0 4rem;background:var(--paper);overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:3rem;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:.6rem;color:var(--red);font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;font-weight:900;margin:0 0 1rem}.eyebrow:before{content:"";width:28px;height:2px;background:currentColor}.hero h1{font-size:clamp(3.4rem,8vw,7rem);line-height:.94;letter-spacing:-.085em;margin:0 0 1.5rem;max-width:700px}.hero h1 em{color:var(--red);font-style:normal;display:block}.hero-lede{font-size:clamp(1.05rem,2vw,1.25rem);max-width:590px;color:#615e57}.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.7rem 0 0}.btn{border:0;display:inline-flex;justify-content:center;align-items:center;gap:.55rem;padding:.85rem 1.1rem;border-radius:10px;background:var(--red);color:white;text-decoration:none;font-size:.86rem;font-weight:800;cursor:pointer;transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px #bd29352e}.btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}.hero-points{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}.pill{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--line);border-radius:100px;background:#fff;padding:.38rem .66rem;font-size:.74rem;font-weight:750}.hero-visual{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#ddd;min-height:370px}.hero-visual img{width:100%;height:100%;min-height:430px;object-fit:cover}.image-label{position:absolute;bottom:18px;left:18px;max-width:84%;background:rgba(255,253,248,.94);padding:.9rem 1rem;border-radius:13px;font-size:.75rem;font-weight:850;box-shadow:0 6px 18px #0002}.image-label small{display:block;color:var(--muted);font-weight:550;margin-top:.2rem}
+.ticker{background:var(--dark);color:#f9f3e8;overflow:hidden}.ticker-inner{display:flex;justify-content:space-between;gap:1.4rem;align-items:center;flex-wrap:wrap;padding:1rem 0;font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800}.ticker b{color:var(--gold)}
+section{padding:clamp(3.6rem,7vw,6rem) 0}.section-white{background:var(--paper)}.section-dark{background:var(--dark);color:#fbf8f1}.section-dark .muted{color:#c9c2b5}.section-head{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:2.3rem}.section-head>div{max-width:750px}.kicker{color:var(--red);font-weight:900;font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.8rem}.section-dark .kicker{color:var(--gold)}h2{font-size:clamp(2.2rem,5vw,4.1rem);line-height:1.02;letter-spacing:-.07em;margin:0 0 1rem}h3{font-size:1.16rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 .7rem}p{margin:.15rem 0 1rem}.muted{color:var(--muted)}.section-head p{max-width:620px;color:var(--muted);margin-bottom:0}.section-dark .section-head p{color:#c7c0b4}.section-number{font-size:clamp(4rem,9vw,7rem);line-height:.8;color:#e9dfcc;font-weight:900;letter-spacing:-.1em;flex-shrink:0}.section-dark .section-number{color:#333538}
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;box-shadow:0 7px 23px rgba(30,27,21,.035)}.section-dark .card{background:#222426;border-color:#373a3d;box-shadow:none}.card p{color:var(--muted);font-size:.92rem;margin-bottom:0}.section-dark .card p{color:#c9c2b5}.iconbox{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#f1e7d3;font-size:1.35rem;margin-bottom:1rem}.section-dark .iconbox{background:#37312a}.tagrow{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}.tag{display:inline-block;border-radius:99px;padding:.25rem .55rem;background:#f2ebdf;font-size:.68rem;font-weight:800;color:#655c4e}.section-dark .tag{background:#36383a;color:#e7ddcd}
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;position:relative}.time-card{position:relative;border-top:4px solid var(--red);background:#fff;border-radius:0 0 18px 18px;padding:1.1rem 1rem 1.3rem;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.time-card:nth-child(2){border-top-color:#cc6a36}.time-card:nth-child(3){border-top-color:#657b8c}.time-card:nth-child(4){border-top-color:var(--green)}.era{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:900}.time-card h3{margin:.4rem 0 .6rem}.time-card p{font-size:.87rem;color:var(--muted);margin:0}.era-num{font-size:2.4rem;font-weight:950;letter-spacing:-.08em;color:#ded3c0;line-height:1}
+.feature-split{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:stretch}.photo-card{position:relative;overflow:hidden;border-radius:var(--radius);min-height:360px;background:#ddd}.photo-card img{width:100%;height:100%;min-height:360px;object-fit:cover}.photo-overlay{position:absolute;inset:auto 0 0;padding:4.5rem 1.25rem 1.25rem;background:linear-gradient(transparent,rgba(20,21,22,.85));color:white}.photo-overlay p{font-size:.88rem;margin:0;color:#f1ece3}.info-stack{display:grid;gap:1rem}.info-panel{padding:1.25rem;border:1px solid var(--line);background:#fff;border-radius:18px}.info-panel p{color:var(--muted);font-size:.91rem;margin-bottom:0}.info-panel h3{display:flex;align-items:center;gap:.55rem}.flowline{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;margin:1.3rem 0 0}.flow-step{position:relative;text-align:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:1rem .45rem;font-size:.76rem;font-weight:850}.flow-step:not(:last-child):after{content:"→";position:absolute;right:-.7rem;top:50%;transform:translate(50%,-50%);z-index:1;background:var(--cream);width:1rem;color:var(--red);font-size:1rem}.flow-step span{display:block;font-size:1.3rem;margin-bottom:.45rem}
+.case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.case-card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--paper)}.case-card img{height:190px;width:100%;object-fit:cover}.case-copy{padding:1.2rem}.case-copy p{font-size:.9rem;color:var(--muted)}.case-copy .lesson{border-top:1px solid var(--line);padding-top:.8rem;color:var(--ink);font-size:.82rem;font-weight:750;margin:0}
+.topic-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}.topic-tags span{padding:.48rem .7rem;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:.78rem;font-weight:750}.section-dark .topic-tags span{background:#222426;border-color:#383a3d;color:#eee5d7}.topic-map{margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1rem}.section-dark .topic-map{border-color:#3b3d3e}.topic-map summary{cursor:pointer;font-weight:850;font-size:.88rem}.topic-map .topic-tags{margin-top:1rem}.topic-map .topic-tags span{font-size:.73rem;font-weight:650}
+.callout{border-left:5px solid var(--gold);padding:1.1rem 1.25rem;background:#fff8e9;border-radius:0 14px 14px 0;margin-top:1.2rem}.callout strong{display:block;margin-bottom:.25rem}.callout p{margin:0;color:#63594b;font-size:.9rem}.section-dark .callout{background:#292723;color:#fff;border-color:var(--gold)}.section-dark .callout p{color:#d7ccba}
+.case-study-list{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.study{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start}.study-no{display:grid;place-items:center;width:40px;height:40px;background:var(--ink);color:white;border-radius:12px;flex-shrink:0;font-weight:900}.study p{font-size:.9rem;color:var(--muted);margin:0}.study b{color:var(--ink)}
+.roadmap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.7rem;counter-reset:road}.roadmap-item{counter-increment:road;border:1px solid var(--line);border-radius:15px;background:#fff;padding:1rem}.roadmap-item:before{content:"0" counter(road);display:block;color:var(--red);font-size:1.2rem;font-weight:950;margin-bottom:.55rem}.roadmap-item h3{font-size:.9rem}.roadmap-item p{color:var(--muted);font-size:.8rem;margin:0}
+.culture-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:2rem;align-items:center}.culture-grid img{width:100%;height:360px;object-fit:cover;border-radius:22px}.culture-copy h3{margin-top:1.1rem}.culture-copy h3:first-of-type{margin-top:0}.culture-copy p{font-size:.93rem;color:var(--muted)}.vocab-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}.vocab{border-radius:14px;padding:1rem;background:#fff;border:1px solid var(--line)}.vocab strong{display:block;font-size:1.1rem}.vocab span{display:block;font-size:.8rem;color:var(--muted);margin-top:.3rem}.speak{margin-top:.55rem;font-size:.72rem;padding:.4rem .55rem;border-radius:8px;border:1px solid var(--line);background:#faf5eb;font-weight:850;cursor:pointer}
+.quiz-shell{display:grid;grid-template-columns:.7fr 1.3fr;gap:1.5rem;align-items:start}.quiz-intro{position:sticky;top:110px}.quiz-box{background:#fff;color:var(--ink);padding:1.5rem;border-radius:20px;border:1px solid #3a3b3d}.quiz-progress{height:5px;background:#eae2d4;border-radius:99px;overflow:hidden;margin-bottom:1.1rem}.quiz-progress div{height:100%;width:0;background:var(--red);transition:width .25s}.quiz-q{font-weight:850;font-size:1.1rem;margin-bottom:1rem}.answers{display:grid;gap:.6rem}.answer{width:100%;text-align:left;background:#faf7f0;border:1px solid var(--line);padding:.8rem 1rem;border-radius:11px;cursor:pointer}.answer:hover{border-color:var(--red)}.answer:disabled{cursor:default}.answer.correct{border-color:#4a805e;background:#edf6ee}.answer.wrong{border-color:#b53b42;background:#faeeee}.quiz-controls{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1rem}.quiz-feedback{font-size:.87rem;color:var(--muted);margin-top:.8rem;min-height:1.4rem}.small-btn{border:0;border-radius:9px;padding:.65rem .8rem;background:var(--ink);color:white;font-size:.82rem;font-weight:850;cursor:pointer}.small-btn:disabled{opacity:.4;cursor:default}
+.glossary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}.gloss{display:flex;gap:.7rem;padding:.8rem 0;border-bottom:1px solid var(--line)}.gloss dt{font-weight:900;min-width:90px}.gloss dd{margin:0;color:var(--muted);font-size:.86rem}.source-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.source-link{display:block;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-size:.85rem;font-weight:800;background:#fff}.source-link span{display:block;font-size:.76rem;font-weight:500;color:var(--muted);margin-top:.2rem}.footer{background:var(--dark);color:#eee4d2;padding:2.3rem 0}.footer-inner{display:flex;justify-content:space-between;gap:2rem;align-items:center}.footer p{font-size:.8rem;color:#bdb5a8;margin:.5rem 0 0}.backtop{color:var(--gold);font-size:.85rem;font-weight:800;text-decoration:none}.note{font-size:.78rem;color:var(--muted)}.footer .note{color:#bdb5a8}
+@media(max-width:980px){nav{gap:.7rem;font-size:.72rem}.hero-grid{gap:2rem}.card-grid,.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.glossary{grid-template-columns:repeat(2,minmax(0,1fr))}.section-number{font-size:4rem}}
+@media(max-width:760px){.menu-toggle{display:block}nav{display:none;position:absolute;top:73px;left:0;right:0;padding:1rem 4%;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}nav.open{display:flex}nav a{padding:.85rem 0;border-bottom:1px solid #eee6d8;font-size:.9rem}.nav-cta{margin-top:.6rem;text-align:center}.hero-grid,.feature-split,.culture-grid,.quiz-shell{grid-template-columns:1fr}.hero{padding-top:3.5rem}.hero-visual,.hero-visual img{min-height:300px}.section-head{align-items:flex-start}.section-number{display:none}.flowline{grid-template-columns:1fr}.flow-step:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-1rem;transform:translate(50%,50%)}.case-study-list,.roadmap{grid-template-columns:1fr 1fr}.quiz-intro{position:static}.culture-grid img{height:260px}.footer-inner{align-items:flex-start;flex-direction:column}}
+@media(max-width:540px){.card-grid,.case-grid,.timeline,.glossary,.source-list,.case-study-list,.roadmap{grid-template-columns:1fr}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:3.7rem}.ticker-inner{gap:.5rem}.study{padding:1rem}.section-head{margin-bottom:1.5rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="topbar"><div class="wrap">A student project · Germany, technology & culture</div></div>
+<div class="topline"></div>
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="Germany 4.0 home">
-      <span class="flag" aria-hidden="true"><span class="fblack"></span><span class="fred"></span><span class="fgold"></span></span>
-      <span>GERMANY 4.0<small>The Smart Revolution</small></span>
-    </a>
+    <a class="brand" href="#home" aria-label="Germany 4.0 home"><span class="flag" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-text">GERMANY 4.0<small>The Smart Revolution</small></span></a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">☰ Menu</button>
     <nav id="mainNav" aria-label="Main navigation">
-      <a href="#overview">Overview</a><a href="#technology">Technology</a><a href="#future">Future</a><a href="#culture">Culture</a><a href="#gallery">Gallery</a><a href="#german">German words</a><a href="#quiz">Quiz</a>
+      <a href="#revolution">The Revolution</a><a href="#tomorrow">Tomorrow</a><a href="#intelligence">AI & Robotics</a><a href="#building">People & Policy</a><a href="#factory">Digital Factory</a><a href="#crosscutting">Trust & Future</a><a href="#culture">Culture</a><a class="nav-cta" href="#quiz">Take the Quiz ↗</a>
     </nav>
   </div>
 </header>
-
 <main>
 <section class="hero" id="home">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Deutschland · Innovation · Zukunft</div>
-      <h1>Germany <em>4.0</em></h1>
-      <p><strong>The Smart Revolution.</strong> Discover how Germany is connecting machines, data and people to shape the factory of the future — with a little German language and culture along the way.</p>
-      <div class="actions"><a class="btn" href="#overview">Explore the project ↓</a><a class="btn secondary" href="#german">Learn a few German words</a></div>
-      <p class="small" style="margin-top:1.2rem">Industrie 4.0 · “Industry 4.0”</p>
-    </div>
-    <div class="hero-art">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85" alt="Engineer working with technology in an industrial setting">
-      <div class="hero-stamp">MADE FOR TOMORROW<span>Technik trifft Mensch — Technology meets people</span></div>
-    </div>
+ <div class="wrap hero-grid">
+  <div>
+   <p class="eyebrow">Industrie 4.0 · Germany in the digital age</p>
+   <h1>From machines <em>to intelligence.</em></h1>
+   <p class="hero-lede">Discover how Germany is connecting engineering, data, people and ideas to build the smart factory of tomorrow. A student-friendly journey through technology, sustainability and the German words behind it.</p>
+   <div class="actions"><a class="btn" href="#revolution">Explore the project <span aria-hidden="true">↘</span></a><a class="btn secondary" href="#german">Learn a little Deutsch <span aria-hidden="true">→</span></a></div>
+   <div class="hero-points"><span class="pill">⚙️ Smart factories</span><span class="pill">🤖 AI & robotics</span><span class="pill">🌱 Green production</span><span class="pill">🗣️ German words</span></div>
   </div>
+  <div class="hero-visual"><img src="assets/factory-hero.webp" alt="Illustrative modern factory with robotic arms, a vehicle assembly line and an engineer using a tablet"><div class="image-label">Die Fabrik der Zukunft <small>The factory of the future · Concept illustration</small></div></div>
+ </div>
+</section>
+<div class="ticker"><div class="wrap ticker-inner"><span><b>01</b> Connect</span><span><b>02</b> Understand</span><span><b>03</b> Optimise</span><span><b>04</b> Collaborate</span><span>Technik trifft Mensch — Technology meets people</span></div></div>
+
+<section class="section-white" id="revolution">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 01 · Germany 4.0: The Smart Revolution</div><h2>Four revolutions.<br>One connected world.</h2><p>Industrie 4.0 is the German term for the digital transformation of manufacturing. Machines, products, workers and suppliers exchange data so production can become more flexible, visible and responsive.</p></div><div class="section-number">01</div></div>
+  <div class="timeline" aria-label="Four industrial revolutions">
+   <article class="time-card"><div class="era">Industry 1.0 · c. 1784</div><div class="era-num">01</div><h3>Steam & mechanics</h3><p>Water and steam power mechanised work. Looms and railways changed how goods were made and moved.</p></article>
+   <article class="time-card"><div class="era">Industry 2.0 · c. 1870</div><div class="era-num">02</div><h3>Electricity & scale</h3><p>Electric motors, standard parts and assembly lines enabled mass production and new factory layouts.</p></article>
+   <article class="time-card"><div class="era">Industry 3.0 · c. 1969</div><div class="era-num">03</div><h3>Computers & automation</h3><p>Electronics, programmable logic controllers (PLCs), CNC machines and robots automated repetitive tasks.</p></article>
+   <article class="time-card"><div class="era">Industry 4.0 · from 2011</div><div class="era-num">04</div><h3>Connected intelligence</h3><p>IoT, cloud systems, AI and cyber-physical systems connect production into a data-informed network.</p></article>
+  </div>
+  <div class="section-head" style="margin-top:3.2rem"><div><div class="kicker">The building blocks</div><h2 style="font-size:clamp(1.8rem,4vw,2.8rem)">What makes a factory “smart”?</h2><p>A smart factory is not simply a room full of robots. Its key systems share information and use that information to improve decisions.</p></div></div>
+  <div class="card-grid">
+   <article class="card"><div class="iconbox">📡</div><h3>Industrial Internet of Things (IIoT)</h3><p>Sensors and connected equipment send machine status, temperature, vibration and energy data to systems that people can act on.</p><div class="tagrow"><span class="tag">Sensors</span><span class="tag">Connectivity</span></div></article>
+   <article class="card"><div class="iconbox">☁️</div><h3>Cloud & edge computing</h3><p>The cloud supports large-scale storage and analysis. Edge computers process information near a machine when speed or data control matters.</p><div class="tagrow"><span class="tag">Low latency</span><span class="tag">Data platforms</span></div></article>
+   <article class="card"><div class="iconbox">🧠</div><h3>Analytics & artificial intelligence</h3><p>Systems can identify patterns, forecast demand, flag defects and recommend actions—but still need good data and human oversight.</p><div class="tagrow"><span class="tag">Machine learning</span><span class="tag">Quality checks</span></div></article>
+   <article class="card"><div class="iconbox">🪞</div><h3>Digital twins</h3><p>A digital twin is a virtual model kept in step with a real asset or process through data. Teams can test changes before making them physically.</p><div class="tagrow"><span class="tag">Simulation</span><span class="tag">What-if tests</span></div></article>
+   <article class="card"><div class="iconbox">🧰</div><h3>Predictive maintenance</h3><p>Vibration, current and temperature patterns can reveal wear early, helping teams plan repairs before a breakdown disrupts production.</p><div class="tagrow"><span class="tag">Less downtime</span><span class="tag">Condition monitoring</span></div></article>
+   <article class="card"><div class="iconbox">🚚</div><h3>Smart logistics</h3><p>Tracking, automated inventory, connected warehouses and driverless transport help move the right item to the right station at the right time.</p><div class="tagrow"><span class="tag">AGVs / AMRs</span><span class="tag">Supply chain</span></div></article>
+   <article class="card"><div class="iconbox">🌐</div><h3>Germany in a global context</h3><p>The assignment contrasts Germany’s engineering- and standards-led approach with the USA’s software and platform strengths, China’s scale and state-led priorities, and Japan’s human-centred Society 5.0 vision.</p><div class="tagrow"><span class="tag">International standards</span><span class="tag">Global competition</span></div></article>
+  </div>
+  <div class="feature-split" style="margin-top:1.5rem">
+   <div class="photo-card"><img src="assets/smart-logistics.webp" alt="Illustrative automated warehouse with mobile robots carrying materials"><div class="photo-overlay"><h3>Connected logistics</h3><p>Fahrerlose Transportsysteme (FTS) — driverless transport systems — can deliver materials between production stations.</p></div></div>
+   <div class="info-stack">
+    <div class="info-panel"><h3>↗ Vertical integration</h3><p>Production-floor data can connect to planning and enterprise systems, helping everyone work from a shared picture.</p></div>
+    <div class="info-panel"><h3>↔ Horizontal integration</h3><p>Suppliers, factories, warehouses and customers can exchange relevant information across the value chain.</p></div>
+    <div class="info-panel"><h3>◎ Human assistance</h3><p>Digital instructions, dashboards and collaborative robots can help people make decisions and reduce exhausting or risky tasks.</p></div>
+   </div>
+  </div>
+  <div class="callout"><strong>Keep the historical figures in context</strong><p>The assignment notes caution that some economic values in older outlines were forecasts, not confirmed results. This site avoids presenting those projections as achieved outcomes.</p></div>
+  <details class="topic-map"><summary>Topic map from the assignment · Chapter 1</summary><div class="topic-tags"><span>Understanding the Fourth Industrial Revolution</span><span>Smart Technologies</span><span>Smart Factory Concepts</span><span>Smart Supply Chain & Logistics</span><span>Industrial IoT</span><span>Cloud & Edge</span><span>Big Data</span><span>Real-time Processing</span><span>Industrial 5G</span><span>Self-optimising Production</span><span>Predictive Maintenance</span><span>Autonomous Decisions</span><span>Digital Twins</span><span>Intelligent Warehousing</span><span>Inventory Management</span><span>Driverless Transport</span><span>Bosch</span><span>BASF</span><span>Volkswagen</span></div></details>
+ </div>
 </section>
 
-<section class="section white" id="overview">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow">01 / The big idea</div><h2>What is Industrie 4.0?</h2></div>
-      <p>Industrie 4.0 is the idea of making industry smarter by connecting physical machines with digital systems. The term became a major German industrial initiative around 2011.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card"><div class="number">01 — CONNECT</div><h3>Machines that communicate</h3><p>Sensors and connected equipment share information, helping factories understand what is happening in real time.</p></article>
-      <article class="card"><div class="number">02 — UNDERSTAND</div><h3>Data with a purpose</h3><p>Cloud computing, edge computing and analytics turn large amounts of production data into useful insights.</p></article>
-      <article class="card"><div class="number">03 — IMPROVE</div><h3>People make better decisions</h3><p>Smart systems can support quality checks, maintenance and planning. Human expertise remains important.</p></article>
-    </div>
-    <h3 style="margin-top:3rem">Four industrial revolutions</h3>
-    <div class="timeline">
-      <div class="era"><strong>Industry 1.0</strong><p>Steam power and mechanisation transformed manual work.</p></div>
-      <div class="era"><strong>Industry 2.0</strong><p>Electricity enabled mass production and assembly lines.</p></div>
-      <div class="era"><strong>Industry 3.0</strong><p>Computers and electronics brought automation to factories.</p></div>
-      <div class="era"><strong>Industry 4.0</strong><p>Connected systems, data and cyber-physical systems link the digital and physical worlds.</p></div>
-    </div>
+<section id="tomorrow">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 02 · Germany 4.0: Industry of Tomorrow</div><h2>Flexible, inventive<br>and more sustainable.</h2><p>The long-term ambition described in the assignment is to make Germany a leading user and supplier of Industrie 4.0—while helping businesses adapt to changing customers, technology and climate goals.</p></div><div class="section-number">02</div></div>
+  <div class="card-grid">
+   <article class="card"><div class="iconbox">🎯</div><h3>Vision & strategic goals</h3><p>Raise productivity, support high-value manufacturing, strengthen exports and give small and medium-sized businesses access to digital tools. Standards and shared programmes help coordinate adoption.</p></article>
+   <article class="card"><div class="iconbox">🧩</div><h3>Mass customisation</h3><p>Flexible machines, digital orders and modular production can make individually configured products at costs closer to standard mass production—sometimes called “batch size one”.</p></article>
+   <article class="card"><div class="iconbox">🔬</div><h3>Innovation ecosystem</h3><p>Industry works with universities, Fraunhofer institutes, technical schools, start-ups and public programmes. Regional clusters build expertise in AI, vehicles and microelectronics.</p></article>
+   <article class="card"><div class="iconbox">🌱</div><h3>Green manufacturing</h3><p>Energy monitoring, efficient drives, waste-heat recovery, repair, reuse and recycling can reduce the resources used per product. Efficiency needs to be measured, not assumed.</p></article>
+   <article class="card"><div class="iconbox">🔁</div><h3>New business models</h3><p>Connected manufacturers can sell services alongside equipment, charge for an outcome or usage, and use data for remote support and product improvement.</p></article>
+   <article class="card"><div class="iconbox">🧬</div><h3>Future technologies</h3><p>Industrial 5G, edge computing, blockchain-based traceability, quantum computing research and advanced AI appear in the assignment’s future-facing technology landscape.</p></article>
+   <article class="card"><div class="iconbox">🏭</div><h3>Key technology sectors</h3><p>Automotive manufacturing, mechanical engineering, electrical engineering, measurement technology and computing are highlighted as important parts of the industrial ecosystem.</p></article>
   </div>
+  <div class="feature-split" style="margin-top:1.5rem">
+   <div class="info-stack">
+    <div class="info-panel"><h3>⚡ Energy & resource efficiency</h3><p>Machine-level data can uncover idle energy use, compressed-air leaks, process waste and opportunities to schedule production intelligently.</p></div>
+    <div class="info-panel"><h3>♻️ Circular economy</h3><p>Design for repair, digital product information, remanufacturing and recycling loops help keep materials useful for longer.</p></div>
+    <div class="info-panel"><h3>🧑‍🏭 Future workforce</h3><p>Automation changes tasks rather than making people irrelevant. Digital skills, safety, reskilling and human-machine collaboration become central.</p></div>
+   </div>
+   <div class="photo-card"><img src="assets/green-manufacturing.webp" alt="Illustrative sustainable factory with solar panels, greenery and an energy monitoring screen"><div class="photo-overlay"><h3>Grüne Industrie</h3><p>Green industry combines digital visibility with efficient use of energy and materials.</p></div></div>
+  </div>
+  <div class="topic-map"><details><summary>Topic map from the assignment · Chapter 2</summary><div class="topic-tags"><span>Digital Agenda</span><span>Platform Industrie 4.0</span><span>Competitiveness</span><span>Growth projections</span><span>Flexible Production</span><span>Customer-driven Manufacturing</span><span>Innovation Clusters</span><span>Research & Development</span><span>Public-private Partnerships</span><span>Circular Economy</span><span>Carbon-neutral Goals</span><span>Product-as-a-Service</span><span>Data-driven Business Models</span><span>Automotive</span><span>Mechanical Engineering</span><span>Electrical Engineering</span><span>Quantum Computing</span><span>Human-machine Collaboration</span><span>Vision 2030</span></div></details></div>
+ </div>
 </section>
 
-<section class="section dark" id="technology">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow" style="color:var(--gold)">02 / Inside a smart factory</div><h2>Technology at work</h2></div>
-      <p class="muted">A modern factory is more than robots. It is a network of machines, software, people and information.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card"><div class="number">01 / IIoT</div><h3>Industrial Internet of Things</h3><p>Sensors connect machines and share operating data, such as temperature, speed or vibration.</p></article>
-      <article class="card"><div class="number">02 / AI + DATA</div><h3>Predictive maintenance</h3><p>Analytics can spot warning signs early, helping teams plan maintenance before a breakdown.</p></article>
-      <article class="card"><div class="number">03 / DIGITAL TWINS</div><h3>A virtual factory</h3><p>A digital twin is a virtual model used to simulate, monitor or improve a physical product or process.</p></article>
-      <article class="card"><div class="number">04 / LOGISTICS</div><h3>Smarter supply chains</h3><p>Tracking systems and connected warehouses improve visibility of parts, stock and deliveries.</p></article>
-      <article class="card"><div class="number">05 / ROBOTICS</div><h3>Humans and robots</h3><p>Collaborative robots, or cobots, can assist workers with repetitive or physically demanding tasks.</p></article>
-      <article class="card"><div class="number">06 / SECURITY</div><h3>Protecting connected systems</h3><p>Cybersecurity and data protection help keep connected production systems safe and reliable.</p></article>
-    </div>
+<section class="section-dark" id="intelligence">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 03 · From Machines to Intelligence</div><h2>Machines collect.<br>Systems learn. People decide.</h2><p class="muted">Manufacturing intelligence grows when sensor data are converted into useful explanations and decisions. The goal is to support people and make production more reliable—not to trust every algorithm blindly.</p></div><div class="section-number">03</div></div>
+  <div class="flowline" aria-label="Manufacturing intelligence process"><div class="flow-step"><span>📍</span>Sense<br><small>Measure</small></div><div class="flow-step"><span>📶</span>Connect<br><small>Collect</small></div><div class="flow-step"><span>🧠</span>Understand<br><small>Analyse</small></div><div class="flow-step"><span>🧭</span>Decide<br><small>Recommend</small></div><div class="flow-step"><span>⚙️</span>Act<br><small>Improve</small></div></div>
+  <div class="card-grid" style="margin-top:1.4rem">
+   <article class="card"><div class="iconbox">🤖</div><h3>AI in industrial work</h3><p>Machine learning can estimate equipment wear, forecast demand and identify patterns in quality data. Computer vision can inspect parts for visible defects.</p><div class="tagrow"><span class="tag">Quality control</span><span class="tag">Predictive analytics</span></div></article>
+   <article class="card"><div class="iconbox">🦾</div><h3>Robotics & automation</h3><p>Industrial robots repeat precise tasks; collaborative robots (cobots) are designed to work near people with suitable safety measures. AMRs navigate routes through a site.</p><div class="tagrow"><span class="tag">Cobots</span><span class="tag">AMRs</span><span class="tag">Adaptive robots</span></div></article>
+   <article class="card"><div class="iconbox">📊</div><h3>Four levels of analytics</h3><p><b>Descriptive:</b> what happened? <b>Diagnostic:</b> why? <b>Predictive:</b> what may happen? <b>Prescriptive:</b> what action is recommended?</p></article>
+   <article class="card"><div class="iconbox">🌡️</div><h3>Sensors & data acquisition</h3><p>Sensors measure conditions such as heat, pressure, vibration and current. Actuators turn control instructions into physical action. Data quality is essential.</p></article>
+   <article class="card"><div class="iconbox">🔗</div><h3>Cyber-physical systems</h3><p>CPS combine computation, networking and physical processes in a feedback loop: monitor the real world, analyse conditions and adjust the process within defined limits.</p></article>
+   <article class="card"><div class="iconbox">🛡️</div><h3>Ethical & technical challenges</h3><p>Industrial AI needs explainable decisions, data privacy, protection of proprietary information, reliable models and clear accountability when something goes wrong.</p></article>
   </div>
+  <div class="callout"><strong>Human oversight matters</strong><p>Automation should operate inside clearly defined safety limits. Important decisions require suitable monitoring, escalation rules and responsibility—not just a high-performing model.</p></div>
+  <details class="topic-map"><summary>Topic map from the assignment · Chapter 3</summary><div class="topic-tags"><span>Manufacturing Intelligence</span><span>Artificial Intelligence</span><span>Machine Learning</span><span>Computer Vision</span><span>Natural Language Processing</span><span>Collaborative Robots</span><span>Service Robots</span><span>RPA</span><span>Swarm Robotics</span><span>Soft Robotics</span><span>Smart Sensors</span><span>Embedded Systems</span><span>Sensor Fusion</span><span>Anomaly Detection</span><span>Decision Support</span><span>Optimisation Algorithms</span><span>Digital Twins</span><span>Siemens AI</span><span>BMW</span><span>SAP</span><span>Festo</span><span>Explainable AI</span></div></details>
+ </div>
 </section>
 
-<section class="section" id="future">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow">03 / Germany's approach</div><h2>Engineering with a long view</h2>
-      <p>Germany is known for engineering, industrial manufacturing and a network of small and medium-sized businesses often called the <em>Mittelstand</em>. Industrie 4.0 aims to build on these strengths while adapting to a more digital economy.</p>
-      <span class="tag">Mensch + Maschine</span>
-      <p style="margin-top:1rem;color:var(--muted)">German: “Human + machine.” The goal is not simply more automation, but useful collaboration between technology and people.</p>
-    </div>
-    <div>
-      <ul class="list">
-        <li><div class="icon">⚙️</div><div><strong>Flexible production</strong><span>Manufacturing lines can adapt to different orders and customised products.</span></div></li>
-        <li><div class="icon">🌱</div><div><strong>Greener manufacturing</strong><span>Energy efficiency, recycling and careful use of resources can reduce waste.</span></div></li>
-        <li><div class="icon">🎓</div><div><strong>Skills for tomorrow</strong><span>Training and lifelong learning help workers develop digital and technical skills.</span></div></li>
-        <li><div class="icon">🔐</div><div><strong>Trust and security</strong><span>Connected factories need standards, secure networks and responsible data use.</span></div></li>
-      </ul>
-    </div>
+<section id="building">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 04 · Building the Future</div><h2>Technology needs<br>people, skills and trust.</h2><p>The assignment treats digital transformation as a shared effort: education, small businesses, research organisations, policy makers, employees and technology providers all have a role.</p></div><div class="section-number">04</div></div>
+  <div class="feature-split">
+   <div class="photo-card"><img src="assets/future-workforce.webp" alt="Illustrative instructor and trainee learning to operate a collaborative industrial robot"><div class="photo-overlay"><h3>Lernen fürs Morgen</h3><p>Learning for tomorrow · Skills remain part of the smart factory.</p></div></div>
+   <div class="info-stack">
+    <div class="info-panel"><h3>🎓 Dual vocational training</h3><p>Germany’s <em>duale Ausbildung</em> combines workplace training with classroom learning. The assignment highlights how this model can develop practical and digital skills together.</p></div>
+    <div class="info-panel"><h3>🛠️ Support for the Mittelstand</h3><p>Small and medium-sized firms can face barriers such as cost, complexity, legacy equipment and limited digital capacity. Demonstration centres, training and consulting help make adoption practical.</p></div>
+    <div class="info-panel"><h3>🤝 Cooperation & infrastructure</h3><p>Platform Industrie 4.0, Fraunhofer institutes, companies, universities and labour representatives can help build standards, research, broadband, industrial 5G and test facilities.</p></div>
+    <div class="info-panel"><h3>🔐 Cybersecurity & social responsibility</h3><p>Protect industrial control systems, separate or carefully segment networks, prepare incident response, respect worker privacy and plan for people whose tasks change.</p></div>
+   </div>
   </div>
-  <div class="wrap">
-    <div class="metrics">
-      <div class="metric"><b>Connect</b><span>Machines and systems exchange information.</span></div>
-      <div class="metric"><b>Predict</b><span>Data helps anticipate problems and needs.</span></div>
-      <div class="metric"><b>Collaborate</b><span>People guide technology toward useful outcomes.</span></div>
-    </div>
+  <div class="card-grid" style="margin-top:1.5rem">
+   <article class="card"><div class="iconbox">📚</div><h3>Reskill and upskill</h3><p>Continuous learning helps experienced workers adapt to data tools, automation, digital maintenance and new technical roles.</p></article>
+   <article class="card"><div class="iconbox">🏛️</div><h3>Policy, standards & funding</h3><p>Government programmes, DIN/VDE/IEC/ISO standards and EU rules shape how data, AI, industrial equipment and services can be deployed responsibly.</p></article>
+   <article class="card"><div class="iconbox">🧑‍⚖️</div><h3>Fairness at work</h3><p>Transformation raises questions about job security, monitoring, accessibility, AI bias and who is accountable for automated decisions.</p></article>
   </div>
+  <details class="topic-map"><summary>Topic map from the assignment · Chapter 4</summary><div class="topic-tags"><span>Workforce Transformation</span><span>Dual Vocational Training</span><span>Digital Skills</span><span>Lifelong Learning</span><span>Mittelstand 4.0</span><span>SME Support</span><span>Government Funding</span><span>Manufacturing-X</span><span>Industrial AI Strategy</span><span>Broadband & 5G</span><span>Smart Grid</span><span>Worker Rights</span><span>Ethical AI</span><span>Public-private Partnerships</span><span>ICS Security</span><span>Zero Trust</span><span>IEC 62443</span></div></details>
+ </div>
 </section>
 
-<section class="section white" id="examples">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow">04 / Real-world examples</div><h2>Smart industry in action</h2></div>
-      <p>The project document highlights German companies and factories exploring connected manufacturing, digital production and industrial intelligence.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card"><div class="number">CASE STUDY 01</div><h3>Siemens</h3><p>The Electronics Works Amberg is presented in the project notes as an example of digital factory practices, including automation and digital-twin approaches.</p></article>
-      <article class="card"><div class="number">CASE STUDY 02</div><h3>Bosch</h3><p>Connected manufacturing can use industrial IoT, cross-plant networking and predictive maintenance to support production.</p></article>
-      <article class="card"><div class="number">CASE STUDY 03</div><h3>BMW & Volkswagen</h3><p>The project notes describe flexible production, digitally integrated processes and factory planning as examples in automotive manufacturing.</p></article>
-    </div>
-    <p class="small" style="margin-top:1rem">These are introductory summaries based on the supplied project outline; specific performance figures should be checked against current primary sources before formal submission.</p>
+<section class="section-white" id="factory">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 05 · Germany 4.0: The Digital Factory</div><h2>A factory is a system,<br>not a single machine.</h2><p>A digital factory joins equipment, control systems, production software, business planning and logistics. Shared data can connect product design to making, delivery and service.</p></div><div class="section-number">05</div></div>
+  <div class="card-grid">
+   <article class="card"><div class="iconbox">🧱</div><h3>Architecture & standards</h3><p>RAMI 4.0 provides a reference architecture for organising Industrie 4.0 elements. Common interfaces and the Asset Administration Shell help equipment describe itself digitally.</p></article>
+   <article class="card"><div class="iconbox">🪞</div><h3>Digital factory toolkit</h3><p>Digital twins, Product Lifecycle Management (PLM), Manufacturing Execution Systems (MES), Enterprise Resource Planning (ERP) and Supply Chain Management (SCM) connect different parts of operations.</p></article>
+   <article class="card"><div class="iconbox">🎛️</div><h3>Smart production</h3><p>Adaptive lines, real-time scheduling, quality analytics and self-optimising processes help production respond to changed orders, capacity and quality conditions.</p></article>
   </div>
+  <div class="section-head" style="margin-top:3rem"><div><div class="kicker">The digital flow</div><h2 style="font-size:clamp(1.8rem,4vw,2.8rem)">From sensor to business decision</h2><p>The exact architecture differs from factory to factory, but these layers show the basic idea.</p></div></div>
+  <div class="roadmap">
+   <div class="roadmap-item"><h3>Physical layer</h3><p>Machines, robots, products and sensors create real-world signals.</p></div>
+   <div class="roadmap-item"><h3>Connectivity</h3><p>Industrial networks and gateways move data between equipment and systems.</p></div>
+   <div class="roadmap-item"><h3>Edge & platform</h3><p>Data are filtered, stored, checked and processed at the proper location.</p></div>
+   <div class="roadmap-item"><h3>Applications</h3><p>MES, analytics, planning and quality applications turn data into action.</p></div>
+   <div class="roadmap-item"><h3>People & control</h3><p>Workers use instructions and dashboards; safety and security set boundaries.</p></div>
+  </div>
+  <div class="section-head" style="margin-top:3rem"><div><div class="kicker">Chapter 5.5 · Examples</div><h2 style="font-size:clamp(1.8rem,4vw,2.8rem)">Industry in action</h2><p>These examples are drawn from the assignment notes. Images beside them are illustrative concept images, not photographs of the named sites.</p></div></div>
+  <div class="case-grid">
+   <article class="case-card"><img src="assets/factory-hero.webp" loading="lazy" alt="Concept illustration of robotic factory automation"><div class="case-copy"><div class="kicker">Electronics</div><h3>Siemens · Amberg</h3><p>The notes describe the Electronics Works Amberg as a flagship example using product identification, automation and extensive process data for quality and planning.</p><p class="lesson">Key lesson: digital traceability can help many product variants share production lines.</p></div></article>
+   <article class="case-card"><img src="assets/green-manufacturing.webp" loading="lazy" alt="Concept illustration of a data-enabled production environment"><div class="case-copy"><div class="kicker">Connected manufacturing</div><h3>Bosch · Blaichach</h3><p>The assignment describes the plant as a lead example for connected machines, standardised data and employee training, with Bosch solutions also offered to other manufacturers.</p><p class="lesson">Key lesson: connect employees as well as equipment.</p></div></article>
+   <article class="case-card"><img src="assets/smart-logistics.webp" loading="lazy" alt="Concept illustration of connected material handling"><div class="case-copy"><div class="kicker">Flexible production</div><h3>BMW · Leipzig</h3><p>The notes discuss flexible manufacturing and the ambition to produce different vehicle powertrains in adaptable production environments.</p><p class="lesson">Key lesson: flexibility is useful when products and demand change.</p></div></article>
+  </div>
+  <div class="case-study-list" style="margin-top:1rem">
+   <article class="study"><div class="study-no">A</div><div><h3>BASF · Smart production</h3><p>The Ludwigshafen chemical complex uses digitalisation themes such as sensor data, predictive maintenance, simulation and AI-supported optimisation. In continuous process industries, connected equipment helps avoid a small failure cascading across linked operations.</p></div></article>
+   <article class="study"><div class="study-no">B</div><div><h3>Volkswagen · Digital production</h3><p>The assignment describes a group-wide industrial cloud effort designed to standardise data and reuse applications across plants. It also notes that vehicle production at the Dresden Transparent Factory ended in December 2025, with the site being converted to research activity in chips, AI and robotics.</p></div></article>
+   <article class="study"><div class="study-no">C</div><div><h3>Adidas Speedfactory · A lesson</h3><p>The notes say the Speedfactories in Germany and the USA closed in 2019–2020 and the technology moved to Asian suppliers. The case highlights the commercial and operational limits of highly localised automated production.</p></div></article>
+   <article class="study"><div class="study-no">D</div><div><h3>Making a smart factory measurable</h3><p>Implementation starts with a readiness assessment, a small pilot, integration and scaling, change management and continuous improvement. Measures can include OEE, defect rates, downtime, costs, time-to-market and return on investment.</p></div></article>
+  </div>
+  <div class="callout"><strong>Security belongs in the design</strong><p>Use appropriate access control, patching, network segmentation, data protection and testing from the beginning. The assignment highlights industrial protocols, GDPR, security-by-design and IEC 62443 as important areas.</p></div>
+  <details class="topic-map"><summary>Topic map from the assignment · Chapter 5</summary><div class="topic-tags"><span>Digital Factory Architecture</span><span>RAMI 4.0</span><span>Administration Shell</span><span>Interoperability</span><span>Digital Thread</span><span>PLM</span><span>MES</span><span>ERP</span><span>SCM</span><span>SCADA & PLCs</span><span>RFID</span><span>Quality Management 4.0</span><span>Zero-defect Manufacturing</span><span>AGVs</span><span>JIT / JIS</span><span>Siemens Amberg</span><span>Bosch Blaichach</span><span>Adidas Speedfactory</span><span>BMW Leipzig</span><span>Volkswagen Dresden</span><span>Implementation Roadmap</span><span>Testing & Validation</span><span>OEE / ROI</span></div></details>
+ </div>
 </section>
 
-<section class="section" id="gallery">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow">05 / Visual tour</div><h2>Industry, place & people</h2></div>
-      <p>A small visual gallery connecting German industrial innovation with its wider cultural setting.</p>
-    </div>
-    <div class="gallery">
-      <figure><img loading="lazy" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1000&q=85" alt="Industrial production equipment"><figcaption>Modern manufacturing</figcaption></figure>
-      <figure><img loading="lazy" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=85" alt="Engineer examining machinery"><figcaption>Engineering expertise</figcaption></figure>
-      <figure><img loading="lazy" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=85" alt="Historic European city rooftops"><figcaption>European heritage</figcaption></figure>
-      <figure><img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=85" alt="Electronic circuit board"><figcaption>Connected technology</figcaption></figure>
-      <figure><img loading="lazy" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=85" alt="Team collaborating at a table"><figcaption>People & ideas</figcaption></figure>
-    </div>
-    <p class="gallery-note">Images load from Unsplash and require an internet connection. If an image does not appear, replace its URL with a photo you have permission to use.</p>
+<section id="crosscutting">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 06 · Cross-cutting themes</div><h2>Reliable data. Shared rules.<br>Resilient systems.</h2><p>These themes affect every chapter: connected factories work best when information is accurate, equipment can communicate, systems are protected and business value is measured.</p></div><div class="section-number">06</div></div>
+  <div class="card-grid">
+   <article class="card"><div class="iconbox">🗃️</div><h3>Data management & analytics</h3><p>Data governance defines who can use information and for what purpose. Data quality, visualisation and knowledge management help turn a stream of measurements into useful insight.</p></article>
+   <article class="card"><div class="iconbox">🧩</div><h3>Standardisation & interoperability</h3><p>Shared standards and protocols such as OPC UA and MQTT help different machines and applications exchange information with consistent meaning.</p></article>
+   <article class="card"><div class="iconbox">🛡️</div><h3>Cybersecurity & resilience</h3><p>Detection, incident response, business continuity and secure-by-design architecture reduce risk from ransomware, espionage, disruption and equipment vulnerabilities.</p></article>
+   <article class="card"><div class="iconbox">⚖️</div><h3>Legal & regulatory framework</h3><p>Digital production raises questions around intellectual property, automated-system liability, contracts, compliance, data protection and cross-border information flows.</p></article>
+   <article class="card"><div class="iconbox">📈</div><h3>Economic impact</h3><p>Cost-benefit analysis and return on investment should compare a technology’s cost with outcomes such as less downtime, improved quality, faster delivery and better resource use.</p></article>
+   <article class="card"><div class="iconbox">🔄</div><h3>Supply-chain value</h3><p>Data sharing can improve demand forecasting, material availability and traceability, but trust, compatible formats and protection of business-sensitive data remain essential.</p></article>
   </div>
+  <details class="topic-map"><summary>Topic map from the assignment · Chapter 6</summary><div class="topic-tags"><span>Data Governance</span><span>Data Quality</span><span>Real-time Analytics</span><span>Visualisation</span><span>Knowledge Management</span><span>ISO & IEC</span><span>OPC UA</span><span>MQTT</span><span>Semantic Interoperability</span><span>Threat Detection</span><span>Incident Response</span><span>Business Continuity</span><span>Intellectual Property</span><span>Liability</span><span>Compliance</span><span>Cost-benefit Analysis</span><span>Competitive Advantage</span><span>New Business Opportunities</span></div></details>
+ </div>
 </section>
 
-<section class="section white" id="german">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow">06 / A little German</div><h2>Words for the smart revolution</h2></div>
-      <p>The website is mainly in English, with useful German words and phrases to give the project a language-learning touch.</p>
-    </div>
-    <div class="word-grid">
-      <div class="word"><b>die Industrie</b><span>industry</span></div>
-      <div class="word"><b>die Zukunft</b><span>the future</span></div>
-      <div class="word"><b>die Technik</b><span>technology / engineering</span></div>
-      <div class="word"><b>die Fabrik</b><span>the factory</span></div>
-      <div class="word"><b>die Daten</b><span>data</span></div>
-      <div class="word"><b>die Maschine</b><span>the machine</span></div>
-      <div class="word"><b>die Forschung</b><span>research</span></div>
-      <div class="word"><b>die Nachhaltigkeit</b><span>sustainability</span></div>
-    </div>
-    <h3 style="margin-top:3rem">Greetings & common phrases</h3>
-    <div class="phrase-list">
-      <div class="phrase"><div><strong>Hallo!</strong><small>Hello!</small></div><button class="speak" data-say="Hallo!" aria-label="Hear Hallo">🔊</button></div>
-      <div class="phrase"><div><strong>Guten Morgen!</strong><small>Good morning!</small></div><button class="speak" data-say="Guten Morgen!" aria-label="Hear Guten Morgen">🔊</button></div>
-      <div class="phrase"><div><strong>Wie geht es Ihnen?</strong><small>How are you? (formal)</small></div><button class="speak" data-say="Wie geht es Ihnen?" aria-label="Hear Wie geht es Ihnen">🔊</button></div>
-      <div class="phrase"><div><strong>Danke schön.</strong><small>Thank you very much.</small></div><button class="speak" data-say="Danke schön." aria-label="Hear Danke schön">🔊</button></div>
-      <div class="phrase"><div><strong>Bitte.</strong><small>Please / you're welcome.</small></div><button class="speak" data-say="Bitte." aria-label="Hear Bitte">🔊</button></div>
-      <div class="phrase"><div><strong>Auf Wiedersehen!</strong><small>Goodbye! (formal)</small></div><button class="speak" data-say="Auf Wiedersehen!" aria-label="Hear Auf Wiedersehen">🔊</button></div>
-    </div>
-    <p class="small" style="margin-top:1rem">Tip: Tap the speaker icon to hear a browser-generated German pronunciation. Audio availability depends on your browser and device.</p>
+<section class="section-dark" id="outlook">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Chapter 07 · Conclusion & future outlook</div><h2>The next revolution<br>must include people.</h2><p class="muted">Germany’s Industrie 4.0 story is not a finished destination. The assignment points to continued AI development, sustainable production, better interoperability and more human-centred manufacturing.</p></div><div class="section-number">07</div></div>
+  <div class="card-grid">
+   <article class="card"><div class="iconbox">👁️</div><h3>Current state</h3><p>There are strong industrial suppliers and showcase projects, but adoption is uneven. Legacy machines, cost, skills gaps, fragmented data and digital infrastructure remain barriers.</p></article>
+   <article class="card"><div class="iconbox">🌍</div><h3>Industry 5.0</h3><p>A human-centred vision adds worker well-being, resilience and sustainability alongside productivity. People remain essential in setting goals and handling exceptions.</p></article>
+   <article class="card"><div class="iconbox">🔭</div><h3>What comes next</h3><p>Advanced AI, quantum-computing research, circular production and global standards may shape future manufacturing, but their impact depends on practical deployment and trust.</p></article>
   </div>
+  <div class="callout"><strong>Recommendations distilled from the assignment</strong><p><b>Policymakers:</b> support skills, infrastructure and shared standards. <b>Industry leaders:</b> set measurable goals and design security in. <b>SMEs:</b> start with a focused pilot. <b>Education providers:</b> combine technical, digital and problem-solving skills. <b>Workers and unions:</b> take part in the transition and ongoing learning.</p></div>
+ </div>
 </section>
 
-<section class="section" id="history">
-  <div class="wrap split">
-    <div><div class="eyebrow">07 / Language & history</div><h2>German: a language with history</h2><p>German belongs to the West Germanic branch of the Indo-European language family. Its written standard developed over centuries, influenced by regional varieties, literature, printing and education.</p><p>Today, German is used across Germany, Austria, Switzerland and other communities. Learning a few words can make a technology project feel connected to the people and place behind it.</p></div>
-    <div class="about-box"><span class="tag">Did you know?</span><h3 style="margin-top:1rem">Long words, clear building blocks</h3><p>German often combines smaller words to create a longer compound word. For example, <em>Industrie</em> + <em>Revolution</em> forms <em>Industrielle Revolution</em> — Industrial Revolution.</p><p style="margin-bottom:0"><strong>Pronunciation tip:</strong> “w” often sounds like English “v”, while “z” usually sounds like “ts”. German “ü” has no exact English equivalent, so listening and practising helps.</p></div>
+<section class="section-white" id="culture">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Culture & society</div><h2>Tradition meets<br>technology.</h2><p>Germany’s industrial future is built on more than machines. Its engineering culture, skilled trades, training traditions and network of smaller specialist businesses are part of the story.</p></div></div>
+  <div class="culture-grid">
+   <img src="assets/future-workforce.webp" loading="lazy" alt="Learner and instructor working with a collaborative robot in a training workshop">
+   <div class="culture-copy">
+    <h3>Handwerk — skilled craft</h3><p>Handwerk refers to skilled crafts and practical trades. Precision, professional pride and learning by doing are useful ways to understand why technical training matters in an industrial society.</p>
+    <h3>Ausbildung — vocational training</h3><p>Germany’s dual vocational system combines workplace learning with classroom education. For Industrie 4.0, the same practical approach can be extended to digital tools, data, robotics and cyber safety.</p>
+    <h3>Mittelstand — small and medium-sized companies</h3><p>Many German firms are specialist manufacturers or family-owned businesses. They contribute to industrial supply chains, and they may need support to modernise older equipment or build digital skills.</p>
+    <h3>Regional diversity</h3><p>Germany is made up of regions with distinct histories and industrial strengths. Smart manufacturing therefore connects different local skills, research centres, suppliers and production sites rather than one single “German factory”.</p>
+   </div>
   </div>
+ </div>
 </section>
 
-<section class="section dark" id="quiz">
-  <div class="wrap">
-    <div class="section-intro">
-      <div><div class="eyebrow" style="color:var(--gold)">08 / Check what you learned</div><h2>Mini quiz</h2></div>
-      <p class="muted">Try these quick questions about Industrie 4.0 and German vocabulary.</p>
-    </div>
-    <div class="quiz-box">
-      <div class="quiz-count" id="quizCount">QUESTION 1 OF 5</div>
-      <div class="quiz-question" id="quizQuestion">What is the main idea of Industrie 4.0?</div>
-      <div class="answers" id="answers"></div>
-      <div class="quiz-feedback" id="quizFeedback" aria-live="polite">Choose one answer to see feedback.</div>
-      <div class="quiz-controls"><span class="quiz-count" id="quizScore">SCORE: 0</span><button class="btn" id="nextQuestion" disabled>Next question →</button></div>
-    </div>
+<section id="german">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Mini German phrasebook · Deutsch</div><h2>A few words for your project.</h2><p>Use the play buttons to hear the phrase through your browser’s speech synthesis, where a German voice is available. English remains the main language of this site.</p></div></div>
+  <div class="vocab-grid">
+   <div class="vocab"><strong>Hallo!</strong><span>Hello!</span><button class="speak" data-say="Hallo!">▶ Hear it</button></div>
+   <div class="vocab"><strong>Guten Morgen</strong><span>Good morning</span><button class="speak" data-say="Guten Morgen">▶ Hear it</button></div>
+   <div class="vocab"><strong>Danke</strong><span>Thank you</span><button class="speak" data-say="Danke">▶ Hear it</button></div>
+   <div class="vocab"><strong>Bitte</strong><span>Please / You’re welcome</span><button class="speak" data-say="Bitte">▶ Hear it</button></div>
+   <div class="vocab"><strong>Technik</strong><span>Technology / engineering</span><button class="speak" data-say="Technik">▶ Hear it</button></div>
+   <div class="vocab"><strong>Die Zukunft</strong><span>The future</span><button class="speak" data-say="Die Zukunft">▶ Hear it</button></div>
+   <div class="vocab"><strong>Die Fabrik</strong><span>The factory</span><button class="speak" data-say="Die Fabrik">▶ Hear it</button></div>
+   <div class="vocab"><strong>Nachhaltigkeit</strong><span>Sustainability</span><button class="speak" data-say="Nachhaltigkeit">▶ Hear it</button></div>
+   <div class="vocab"><strong>Die Forschung</strong><span>Research</span><button class="speak" data-say="Die Forschung">▶ Hear it</button></div>
+   <div class="vocab"><strong>Zusammenarbeit</strong><span>Collaboration</span><button class="speak" data-say="Zusammenarbeit">▶ Hear it</button></div>
+   <div class="vocab"><strong>Guten Tag!</strong><span>Hello / Good day</span><button class="speak" data-say="Guten Tag!">▶ Hear it</button></div>
+   <div class="vocab"><strong>Auf Wiedersehen</strong><span>Goodbye</span><button class="speak" data-say="Auf Wiedersehen">▶ Hear it</button></div>
   </div>
+  <div class="callout"><strong>Small pronunciation tip</strong><p>German nouns are capitalised: <em>die Fabrik</em>, <em>die Zukunft</em>, <em>die Forschung</em>. The letter combination “sch” sounds like “sh” in English; the “ch” sound varies by word and region.</p></div>
+  <div class="info-panel" style="margin-top:1rem"><h3>Where does German come from?</h3><p>German is a West Germanic language, related to English and Dutch. Its modern standard form developed over centuries alongside regional dialects. Today, learners may encounter standard German (often called <em>Hochdeutsch</em>) as well as regional ways of speaking. This project uses clear standard phrases for a beginner-friendly introduction.</p></div>
+ </div>
 </section>
 
-<section class="section white" id="about">
-  <div class="wrap split">
-    <div><div class="eyebrow">09 / About this project</div><h2>About the project</h2><p>This student website introduces <em>Germany 4.0: The Smart Revolution</em>. It explains the shift from mechanisation to connected, data-driven production and briefly introduces German words, greetings and language history.</p></div>
-    <div class="about-box"><h3>Project objectives</h3><ul><li>Explain the four industrial revolutions.</li><li>Introduce smart-factory technologies in simple English.</li><li>Show examples mentioned in the project outline.</li><li>Connect the topic to German vocabulary and culture.</li><li>Encourage curiosity about technology, sustainability and future skills.</li></ul><p class="small">Prepared as an educational overview. Verify statistics and company-specific claims against reliable, current sources before submitting.</p></div>
+<section class="section-white" id="quiz">
+ <div class="wrap quiz-shell">
+  <div class="quiz-intro"><div class="kicker">Check what you learned</div><h2 style="font-size:clamp(2.3rem,5vw,3.5rem)">Quick quiz.</h2><p class="muted">Five questions about the main ideas in Germany 4.0. Pick an answer and see your score at the end.</p><div class="tagrow"><span class="tag">5 questions</span><span class="tag">Instant feedback</span></div></div>
+  <div class="quiz-box" aria-live="polite"><div class="quiz-progress"><div id="quizProgress"></div></div><div id="quizContent"></div><div class="quiz-controls"><span id="quizCount" class="note">Question 1 of 5</span><button class="small-btn" id="nextQuiz" disabled>Next question →</button></div><div id="quizFeedback" class="quiz-feedback"></div></div>
+ </div>
+</section>
+
+<section id="glossary">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Glossary</div><h2>Important terms, simply explained.</h2><p>A quick reference for abbreviations that appear throughout the assignment.</p></div></div>
+  <dl class="glossary">
+   <div class="gloss"><dt>IIoT</dt><dd>Industrial Internet of Things: connected industrial equipment and sensors.</dd></div>
+   <div class="gloss"><dt>AI</dt><dd>Artificial intelligence: methods that perform tasks such as pattern recognition and prediction.</dd></div>
+   <div class="gloss"><dt>CPS</dt><dd>Cyber-physical system: tightly linked computing, networking and physical processes.</dd></div>
+   <div class="gloss"><dt>AGV / AMR</dt><dd>Automated guided vehicle / autonomous mobile robot used to move items.</dd></div>
+   <div class="gloss"><dt>Digital twin</dt><dd>A virtual model synchronised with data from a physical asset or process.</dd></div>
+   <div class="gloss"><dt>Edge computing</dt><dd>Processing data close to the machines or devices that create it.</dd></div>
+   <div class="gloss"><dt>MES</dt><dd>Manufacturing Execution System: manages and monitors shop-floor production.</dd></div>
+   <div class="gloss"><dt>ERP</dt><dd>Enterprise Resource Planning: connects core business processes and resources.</dd></div>
+   <div class="gloss"><dt>SCM</dt><dd>Supply Chain Management: coordinates material, information and delivery flows.</dd></div>
+   <div class="gloss"><dt>RAMI 4.0</dt><dd>Reference Architecture Model Industrie 4.0; a way to structure the industrial digital system.</dd></div>
+   <div class="gloss"><dt>OEE</dt><dd>Overall Equipment Effectiveness: combines availability, performance and quality.</dd></div>
+   <div class="gloss"><dt>Mittelstand</dt><dd>Germany’s small and medium-sized business sector, including specialist manufacturers.</dd></div>
+  </dl>
+ </div>
+</section>
+
+<section class="section-white" id="sources">
+ <div class="wrap">
+  <div class="section-head"><div><div class="kicker">Project notes & sources</div><h2>Read further.</h2><p>The explanations and chapter structure on this site are based primarily on the uploaded <em>Germany 4.0: The Smart Revolution — Detailed Assignment Notes</em> (October 2026). Company examples and figures should be checked against original sources before formal citation.</p></div></div>
+  <div class="source-list">
+   <a class="source-link" href="https://www.plattform-i40.de/" target="_blank" rel="noopener noreferrer">Plattform Industrie 4.0 <span>German platform for Industrie 4.0 coordination, reference models and guidance.</span></a>
+   <a class="source-link" href="https://www.gtai.de/en/invest/industries/industrial-production/smart-manufacturing" target="_blank" rel="noopener noreferrer">Germany Trade & Invest — Smart Manufacturing <span>Overview of Germany's industrial production and technology environment.</span></a>
+   <a class="source-link" href="https://www.siemens.com/" target="_blank" rel="noopener noreferrer">Siemens <span>Industrial automation, software and digital manufacturing information.</span></a>
+   <a class="source-link" href="https://www.bosch.com/" target="_blank" rel="noopener noreferrer">Bosch <span>Connected industry and industrial technology information.</span></a>
+   <a class="source-link" href="https://www.fraunhofer.de/" target="_blank" rel="noopener noreferrer">Fraunhofer-Gesellschaft <span>Applied research and industrial technology projects.</span></a>
+   <a class="source-link" href="https://www.din.de/en" target="_blank" rel="noopener noreferrer">DIN — German Institute for Standardization <span>Standardisation information; consult the relevant standards for technical work.</span></a>
   </div>
+  <p class="note" style="margin-top:1rem">Visual note: all four images bundled with this project are AI-generated illustrations for educational use. They are not actual photographs of Siemens, Bosch, BMW, Volkswagen or any named facility. This site works offline; the “Read further” links need an internet connection.</p>
+ </div>
 </section>
 </main>
-
-<footer><div class="wrap"><span>GERMANY 4.0 · The Smart Revolution</span><span>Ein Blick in die Zukunft — A look into the future.</span><span>Student project website</span></div></footer>
-
+<footer class="footer"><div class="wrap footer-inner"><div><a class="brand" href="#home" style="color:#fff;text-decoration:none"><span class="flag" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-text">GERMANY 4.0<small style="color:#bdb5a8">Technik trifft Mensch</small></span></a><p>Student project · Industry, innovation, sustainability and language.</p><p class="note">Content organised from the provided detailed assignment notes.</p></div><a class="backtop" href="#home">Back to top ↑</a></div></footer>
 <script>
-  // Mobile navigation
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mainNav.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", isOpen);
-  });
-  mainNav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      mainNav.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  // Speak German phrases using the browser's speech synthesis
-  document.querySelectorAll(".speak").forEach(button => {
-    button.addEventListener("click", () => {
-      if (!("speechSynthesis" in window)) {
-        alert("Speech playback is not supported by this browser.");
-        return;
-      }
-      window.speechSynthesis.cancel();
-      const speech = new SpeechSynthesisUtterance(button.dataset.say);
-      speech.lang = "de-DE";
-      speech.rate = 0.85;
-      window.speechSynthesis.speak(speech);
-    });
-  });
-
-  // Mini quiz: edit or add questions inside this list
-  const quizQuestions = [
-    {
-      question: "What is the main idea of Industrie 4.0?",
-      answers: ["Returning to steam-powered machines", "Connecting machines, data and digital systems", "Replacing every worker with a robot", "Using only manual production"],
-      correct: 1,
-      explanation: "Industrie 4.0 connects physical production with digital systems, data and networks."
-    },
-    {
-      question: "Which technology uses sensors to connect machines and exchange data?",
-      answers: ["Industrial Internet of Things (IIoT)", "Traditional printing press", "Steam engine only", "Hand assembly"],
-      correct: 0,
-      explanation: "IIoT connects industrial equipment and sensors so information can be shared."
-    },
-    {
-      question: "What does the German word “Zukunft” mean?",
-      answers: ["Factory", "Research", "Future", "Machine"],
-      correct: 2,
-      explanation: "“Die Zukunft” means “the future” in English."
-    },
-    {
-      question: "What is a digital twin?",
-      answers: ["A second physical factory", "A virtual model of a product or process", "A worker training certificate", "A type of delivery truck"],
-      correct: 1,
-      explanation: "A digital twin is a virtual representation used to simulate, monitor or improve something physical."
-    },
-    {
-      question: "Which German word means “thank you”?",
-      answers: ["Bitte", "Hallo", "Danke", "Zukunft"],
-      correct: 2,
-      explanation: "“Danke” means “thank you”; “bitte” can mean “please” or “you're welcome.”"
-    }
-  ];
-  let questionIndex = 0;
-  let score = 0;
-  let answered = false;
-  const questionEl = document.getElementById("quizQuestion");
-  const answersEl = document.getElementById("answers");
-  const feedbackEl = document.getElementById("quizFeedback");
-  const countEl = document.getElementById("quizCount");
-  const scoreEl = document.getElementById("quizScore");
-  const nextButton = document.getElementById("nextQuestion");
-
-  function showQuestion() {
-    answered = false;
-    const item = quizQuestions[questionIndex];
-    countEl.textContent = `QUESTION ${questionIndex + 1} OF ${quizQuestions.length}`;
-    questionEl.textContent = item.question;
-    answersEl.innerHTML = "";
-    feedbackEl.textContent = "Choose one answer to see feedback.";
-    nextButton.disabled = true;
-    nextButton.textContent = questionIndex === quizQuestions.length - 1 ? "See result →" : "Next question →";
-    item.answers.forEach((answer, index) => {
-      const button = document.createElement("button");
-      button.className = "answer";
-      button.textContent = answer;
-      button.addEventListener("click", () => selectAnswer(index, button));
-      answersEl.appendChild(button);
-    });
-  }
-  function selectAnswer(index, selectedButton) {
-    if (answered) return;
-    answered = true;
-    const item = quizQuestions[questionIndex];
-    const allButtons = answersEl.querySelectorAll("button");
-    allButtons.forEach((button, i) => {
-      button.disabled = true;
-      if (i === item.correct) button.classList.add("correct");
-    });
-    if (index === item.correct) {
-      score++;
-      feedbackEl.textContent = "Well done! " + item.explanation;
-    } else {
-      selectedButton.classList.add("wrong");
-      feedbackEl.textContent = "Not quite. " + item.explanation;
-    }
-    scoreEl.textContent = `SCORE: ${score}`;
-    nextButton.disabled = false;
-  }
-  nextButton.addEventListener("click", () => {
-    if (questionIndex < quizQuestions.length - 1) {
-      questionIndex++;
-      showQuestion();
-    } else {
-      questionEl.textContent = `Quiz complete — you scored ${score} out of ${quizQuestions.length}!`;
-      answersEl.innerHTML = "";
-      feedbackEl.textContent = score === quizQuestions.length ? "Ausgezeichnet! Excellent work." : "Keep exploring the page and try again to improve your score.";
-      countEl.textContent = "QUIZ COMPLETE";
-      nextButton.textContent = "Try again ↻";
-      nextButton.disabled = false;
-      nextButton.onclick = () => {
-        questionIndex = 0; score = 0; scoreEl.textContent = "SCORE: 0";
-        nextButton.onclick = null;
-        showQuestion();
-      };
-    }
-  });
-  showQuestion();
+const menuToggle=document.getElementById('menuToggle');
+const mainNav=document.getElementById('mainNav');
+menuToggle.addEventListener('click',()=>{const open=mainNav.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'✕ Close':'☰ Menu';});
+mainNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mainNav.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰ Menu';}));
+document.querySelectorAll('[data-say]').forEach(btn=>btn.addEventListener('click',()=>{if(!('speechSynthesis'in window)){alert('Speech playback is not supported in this browser.');return;}window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(btn.dataset.say);utterance.lang='de-DE';const voices=window.speechSynthesis.getVoices();const german=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('de'));if(german)utterance.voice=german;window.speechSynthesis.speak(utterance);}));
+const quiz=[
+ {q:'What is the main idea of Industrie 4.0?',a:['Only replacing every worker with robots','Connecting machines, products, people and systems through data','Making factories use only steam power','Stopping all data exchange between suppliers'],correct:1,why:'Industrie 4.0 connects physical production and digital systems so they can share information and adapt.'},
+ {q:'Which technology helps spot machine wear before a breakdown?',a:['Predictive maintenance','A paper-only inventory','A fixed assembly line with no sensors','A manual-only invoice'],correct:0,why:'Predictive maintenance uses condition data such as vibration, temperature and motor current to estimate when equipment needs attention.'},
+ {q:'What is a digital twin?',a:['A second physical factory beside the first','A virtual model that is kept in step with real-world data','A document containing only a parts list','A robot with two arms'],correct:1,why:'A digital twin models an asset or process and uses data to reflect its state.'},
+ {q:'What does Germany’s dual vocational training combine?',a:['Only online tutorials and exams','Workplace learning and classroom education','Factory automation and cloud storage','Exports and imports'],correct:1,why:'Duale Ausbildung combines practical training at work with classroom learning.'},
+ {q:'Why do standards and cybersecurity matter in a digital factory?',a:['They help systems communicate consistently and protect connected operations','They remove the need for trained people','They guarantee that every AI result is correct','They prevent all factories from sharing data'],correct:0,why:'Common standards support interoperability, while security and resilience protect equipment, data and continuity.'}
+];
+let qi=0,score=0,answered=false,quizFinished=false;
+const quizContent=document.getElementById('quizContent'),quizProgress=document.getElementById('quizProgress'),quizCount=document.getElementById('quizCount'),quizFeedback=document.getElementById('quizFeedback'),nextQuiz=document.getElementById('nextQuiz');
+function renderQuiz(){answered=false;const q=quiz[qi];quizProgress.style.width=(qi/quiz.length*100)+'%';quizCount.textContent='Question '+(qi+1)+' of '+quiz.length;quizFeedback.textContent='';nextQuiz.disabled=true;nextQuiz.textContent=qi===quiz.length-1?'See my result →':'Next question →';quizContent.innerHTML='<div class="quiz-q">'+(qi+1)+'. '+q.q+'</div><div class="answers">'+q.a.map((x,i)=>'<button class="answer" data-answer="'+i+'">'+String.fromCharCode(65+i)+'. '+x+'</button>').join('')+'</div>';quizContent.querySelectorAll('[data-answer]').forEach(btn=>btn.addEventListener('click',()=>chooseAnswer(Number(btn.dataset.answer))));}
+function chooseAnswer(n){if(answered)return;answered=true;const q=quiz[qi];if(n===q.correct)score++;quizContent.querySelectorAll('[data-answer]').forEach((btn,i)=>{btn.disabled=true;if(i===q.correct)btn.classList.add('correct');else if(i===n)btn.classList.add('wrong');});quizFeedback.textContent=(n===q.correct?'✓ Correct. ':'Not quite. ')+q.why;nextQuiz.disabled=false;quizProgress.style.width=((qi+1)/quiz.length*100)+'%';}
+nextQuiz.addEventListener('click',()=>{if(quizFinished){qi=0;score=0;quizFinished=false;renderQuiz();return;}if(qi<quiz.length-1){qi++;renderQuiz();return;}quizFinished=true;quizCount.textContent='Quiz complete';quizFeedback.textContent='You scored '+score+' out of '+quiz.length+'. '+(score===5?'Ausgezeichnet! You know the basics.':score>=3?'Gut gemacht! Review the chapter cards and try again.':'Keep exploring the chapters, then try again.');quizProgress.style.width='100%';quizContent.innerHTML='<div class="quiz-q" style="font-size:2rem">'+score+' / '+quiz.length+'</div><p class="muted">'+(score===5?'Excellent work!':score>=3?'Good work—one more round will help.':'Keep learning; you can retry any time.')+'</p>';nextQuiz.textContent='Try again ↻';nextQuiz.disabled=false;});
+renderQuiz();
 </script>
 </body>
 </html>

@@ -57,6 +57,45 @@
 @media(max-width:600px){.abs-row:not(.abs-row-4){display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px}.abs-row:not(.abs-row-4) .abs-card{flex:0 0 78%;scroll-snap-align:start}.abs-grid{grid-template-columns:1fr}}
 @media print{.abs-card{break-inside:avoid}}
 /* ILLUSTRATIONS END */
+/* German <-> English translator widget (added) */
+.gt-root{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;font-family:var(--sans);color:var(--ink);line-height:1.5}
+.gt-fab{display:inline-flex;align-items:center;gap:9px;border:0;border-radius:999px;background:var(--dark);color:#fff;padding:12px 18px 12px 12px;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(20,26,31,.32);transition:transform .2s,background .2s}
+.gt-fab:hover{transform:translateY(-2px);background:var(--dark2)}
+.gt-fab-ico{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1c1f}
+.gt-fab-ico svg{width:18px;height:18px;display:block}
+.gt-panel{position:absolute;right:0;bottom:calc(100% + 12px);width:390px;max-width:calc(100vw - 36px);max-height:min(82vh,640px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 24px 70px rgba(20,26,31,.28)}
+.gt-panel[hidden]{display:none}
+.gt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;background:var(--dark);color:#fff;border-radius:var(--radius) var(--radius) 0 0;border-bottom:3px solid var(--gold)}
+.gt-title{font-family:var(--serif);font-size:1.3rem;font-weight:500;line-height:1.15}
+.gt-sub{color:#bdc5ca;font-size:.74rem;margin-top:2px}
+.gt-close{border:0;background:rgba(255,255,255,.12);color:#fff;width:30px;height:30px;border-radius:50%;font:inherit;font-size:1.25rem;line-height:1;cursor:pointer;padding:0}
+.gt-close:hover{background:rgba(255,255,255,.24)}
+.gt-body{padding:16px 18px 6px}
+.gt-langs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-bottom:12px}
+.gt-lang{text-align:center;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:800;font-size:.84rem}
+.gt-swap{border:0;width:36px;height:36px;border-radius:50%;background:var(--gold);color:#1a1c1f;font:inherit;font-size:1.05rem;font-weight:800;cursor:pointer;padding:0;transition:transform .2s}
+.gt-swap:hover{transform:rotate(180deg)}
+.gt-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.gt-input{display:block;width:100%;min-height:96px;resize:vertical;border:1px solid #d4cec3;border-radius:12px;padding:12px 14px;background:#fff;color:var(--ink);font:inherit;font-size:.92rem;line-height:1.5}
+.gt-input::placeholder{color:#8a9299}
+.gt-meta{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 12px;color:var(--muted);font-size:.72rem}
+.gt-link{border:0;background:none;color:#98342d;font:inherit;font-size:.74rem;font-weight:700;text-decoration:underline;text-underline-offset:2px;cursor:pointer;padding:0}
+.gt-go{display:block;width:100%;border:0;border-radius:999px;background:var(--red);color:#fff;padding:12px 17px;font:inherit;font-size:.9rem;font-weight:800;cursor:pointer;transition:transform .2s,opacity .2s}
+.gt-go:hover{transform:translateY(-1px)}
+.gt-go:disabled{opacity:.6;cursor:progress;transform:none}
+.gt-out-label{margin:16px 2px 6px;color:var(--muted);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.gt-output{min-height:96px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-size:.95rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.gt-output:empty::before{content:"Your translation will appear here.";color:#8a9299}
+.gt-status{min-height:20px;margin:8px 2px 0;font-size:.78rem;color:var(--muted)}
+.gt-status.is-error{color:#b3302a;font-weight:700}
+.gt-actions{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:6px 2px 14px}
+.gt-actions a{color:#98342d;font-size:.78rem;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.gt-note{padding:10px 18px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:.68rem}
+.gt-root button:focus-visible,.gt-root a:focus-visible,.gt-root textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(max-width:520px){.gt-root{right:12px;left:12px;display:flex;justify-content:flex-end}.gt-panel{width:100%;max-width:none;right:0;left:0}}
+@media(prefers-reduced-motion:reduce){.gt-fab,.gt-swap,.gt-go{transition:none}.gt-fab:hover,.gt-swap:hover,.gt-go:hover{transform:none}}
+@media print{.gt-root{display:none!important}}
+/* end translator widget */
 </style>
 </head>
 <body>
@@ -170,6 +209,141 @@
 
   // Graceful fallback for publishers that block hot-linked images or change paths.
   $$('img').forEach(img=>img.addEventListener('error',()=>{if(img.dataset.fb)return;const p=img.closest('figure,.chapter-card-image,.culture-photo,.hero');if(p)p.classList.add('image-missing');},{once:true}));
+})();
+</script>
+<!-- German <-> English translator widget (added) -->
+<div class="gt-root" id="gtRoot">
+<section class="gt-panel" id="gtPanel" role="dialog" aria-labelledby="gtTitle" hidden>
+<div class="gt-head"><div><div class="gt-title" id="gtTitle">Translator</div><div class="gt-sub">German ⇄ English · online</div></div><button type="button" class="gt-close" id="gtClose" aria-label="Close translator">×</button></div>
+<div class="gt-body">
+<div class="gt-langs"><span class="gt-lang" id="gtFromLabel">German</span><button type="button" class="gt-swap" id="gtSwap" aria-label="Swap languages" title="Swap languages">⇄</button><span class="gt-lang" id="gtToLabel">English</span></div>
+<label class="gt-sr" for="gtInput">Text to translate</label>
+<textarea class="gt-input" id="gtInput" maxlength="1500" lang="de" spellcheck="false"></textarea>
+<div class="gt-meta"><span id="gtCount">0 / 1500</span><button type="button" class="gt-link" id="gtClear">Clear</button></div>
+<button type="button" class="gt-go" id="gtGo">Translate</button>
+<div class="gt-out-label">Translation</div>
+<div class="gt-output" id="gtOutput" aria-live="polite" lang="en"></div>
+<div class="gt-status" id="gtStatus" role="status"></div>
+<div class="gt-actions"><button type="button" class="gt-link" id="gtCopy" hidden>Copy translation</button><a id="gtGoogle" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Open in Google Translate ↗</a></div>
+</div>
+<div class="gt-note">Needs an internet connection. Powered by the free MyMemory service, which has a daily limit.</div>
+</section>
+<button type="button" class="gt-fab" id="gtFab" aria-expanded="false" aria-controls="gtPanel"><span class="gt-fab-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg></span><span>Translate</span></button>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('gtRoot'); if(!root) return;
+  function g(id){return document.getElementById(id);}
+  var fab=g('gtFab'),panel=g('gtPanel'),closeBtn=g('gtClose'),swap=g('gtSwap'),fromL=g('gtFromLabel'),toL=g('gtToLabel'),
+      input=g('gtInput'),count=g('gtCount'),clear=g('gtClear'),go=g('gtGo'),output=g('gtOutput'),status=g('gtStatus'),
+      copy=g('gtCopy'),gLink=g('gtGoogle');
+  var NAMES={de:'German',en:'English'}, MAX=1500, CHUNK_BYTES=450, TIMEOUT=15000;
+  var from='de', to='en', runId=0, lastOut='';
+  var enc=(typeof TextEncoder!=='undefined')?new TextEncoder():null;
+  function bytes(s){return enc?enc.encode(s).length:s.length*2;}
+
+  function render(){
+    fromL.textContent=NAMES[from]; toL.textContent=NAMES[to];
+    input.lang=from; output.lang=to;
+    input.placeholder='Type or paste '+NAMES[from]+' text…';
+    updateMeta();
+  }
+  function updateMeta(){
+    count.textContent=input.value.length+' / '+MAX;
+    gLink.href='https://translate.google.com/?sl='+from+'&tl='+to+'&op=translate&text='+encodeURIComponent(input.value);
+  }
+  function setStatus(msg,isErr){status.textContent=msg||'';status.classList.toggle('is-error',!!isErr);}
+  function setOutput(t){lastOut=t||'';output.textContent=lastOut;copy.hidden=!lastOut;}
+
+  function openPanel(){panel.hidden=false;fab.setAttribute('aria-expanded','true');input.focus({preventScroll:true});}
+  function closePanel(){var had=panel.contains(document.activeElement);panel.hidden=true;fab.setAttribute('aria-expanded','false');if(had)fab.focus({preventScroll:true});}
+  fab.addEventListener('click',function(){panel.hidden?openPanel():closePanel();});
+  closeBtn.addEventListener('click',closePanel);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden)closePanel();});
+
+  swap.addEventListener('click',function(){
+    runId++; go.disabled=false; go.textContent='Translate';
+    var t=from; from=to; to=t;
+    if(lastOut){input.value=lastOut;}
+    setOutput(''); setStatus(''); render();
+  });
+  clear.addEventListener('click',function(){runId++;go.disabled=false;go.textContent='Translate';input.value='';setOutput('');setStatus('');updateMeta();input.focus();});
+  input.addEventListener('input',function(){updateMeta();setStatus('');});
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();translate();}});
+  go.addEventListener('click',translate);
+
+  copy.addEventListener('click',function(){
+    function done(){setStatus('Copied to clipboard.');}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(lastOut).then(done,fallback);}else{fallback();}
+    function fallback(){var ta=document.createElement('textarea');ta.value=lastOut;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){setStatus('Could not copy. Select the text and copy it manually.',true);}document.body.removeChild(ta);}
+  });
+
+  // Split text into pieces the free API accepts (it limits each request to ~500 bytes).
+  function hardSplit(s){var out=[],cur='',parts=s.split(/(\s+)/);for(var i=0;i<parts.length;i++){if(cur&&bytes(cur+parts[i])>CHUNK_BYTES){out.push(cur);cur=parts[i];}else{cur+=parts[i];}}if(cur)out.push(cur);return out;}
+  function chunkLine(line){
+    var sentences=line.match(/[^.!?…]+(?:[.!?…]+["'”’)\]]*\s*|$)/g)||[line], out=[], cur='';
+    sentences.forEach(function(s){
+      if(bytes(s)>CHUNK_BYTES){if(cur){out.push(cur);cur='';}hardSplit(s).forEach(function(p){out.push(p);});return;}
+      if(cur&&bytes(cur+s)>CHUNK_BYTES){out.push(cur);cur=s;}else{cur+=s;}
+    });
+    if(cur)out.push(cur);
+    return out;
+  }
+  function decode(t){try{return new DOMParser().parseFromString(t,'text/html').documentElement.textContent;}catch(e){return t;}}
+
+  function requestChunk(text,src,dst){
+    var ctrl=(typeof AbortController!=='undefined')?new AbortController():null;
+    var timer=setTimeout(function(){if(ctrl)ctrl.abort();},TIMEOUT);
+    var url='https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+src+'%7C'+dst;
+    return fetch(url,ctrl?{signal:ctrl.signal}:undefined).then(function(r){
+      if(!r.ok)throw new Error('The translation service returned an error ('+r.status+').');
+      return r.json();
+    }).then(function(d){
+      clearTimeout(timer);
+      var txt=d&&d.responseData&&d.responseData.translatedText;
+      if(Number(d&&d.responseStatus)===429||/MYMEMORY WARNING/i.test(txt||'')){var e=new Error('The free daily translation limit has been reached. Try again later, or use Google Translate below.');throw e;}
+      if(Number(d&&d.responseStatus)!==200||typeof txt!=='string')throw new Error((d&&d.responseDetails)||'The translation failed.');
+      return decode(txt);
+    },function(err){
+      clearTimeout(timer);
+      if(err&&err.name==='AbortError')throw new Error('The request timed out. Check your connection and try again.');
+      throw err;
+    });
+  }
+
+  function translate(){
+    var text=input.value.trim();
+    if(!text){setStatus('Type or paste some text first.',true);input.focus();return;}
+    if(navigator.onLine===false){setStatus('You appear to be offline. Connect to the internet and try again.',true);return;}
+    var id=++runId, src=from, dst=to;
+    var lines=text.split(/\r?\n/);
+    go.disabled=true; go.textContent='Translating…'; setStatus(''); setOutput('');
+    var results=[], p=Promise.resolve();
+    lines.forEach(function(line,i){
+      p=p.then(function(){
+        if(id!==runId)throw {stale:true};
+        if(!line.trim()){results[i]='';return;}
+        var chunks=chunkLine(line.trim()), parts=[];
+        return chunks.reduce(function(acc,c,k){
+          return acc.then(function(){
+            if(id!==runId)throw {stale:true};
+            return requestChunk(c,src,dst).then(function(t){parts[k]=t.trim();});
+          });
+        },Promise.resolve()).then(function(){results[i]=parts.join(' ');});
+      });
+    });
+    p.then(function(){
+      if(id!==runId)return;
+      setOutput(results.join('\n').replace(/\n{3,}/g,'\n\n'));
+      go.disabled=false; go.textContent='Translate';
+    }).catch(function(err){
+      if(err&&err.stale)return;
+      if(id!==runId)return;
+      go.disabled=false; go.textContent='Translate';
+      setStatus((err&&err.message)?err.message:'The translation failed. Please try again.',true);
+    });
+  }
+  render();
 })();
 </script>
 </body>

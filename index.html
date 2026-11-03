@@ -217,6 +217,49 @@
 <style>
 .lab-game-top{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}.lab-goal-card{border:1px solid var(--line,rgba(255,255,255,.14));border-radius:12px;padding:14px;background:rgba(255,255,255,.035);min-width:0}.lab-goal-card strong{display:block;font-size:1.65rem;margin:5px 0;line-height:1.2}.lab-goal-card small,.lab-small-label{display:block;color:var(--muted,#aab4bf);font-size:.78rem}.lab-small-label{font-weight:800;letter-spacing:.09em}.lab-event{margin-top:12px;padding:12px;border-radius:10px;background:rgba(70,190,130,.12);border:1px solid rgba(70,190,130,.35);font-weight:700}.lab-event.warning{background:rgba(228,183,66,.15);border-color:#e4b742}.lab-event.smoke{background:rgba(230,110,65,.17);border-color:#e66e41;animation:labPulse .5s ease-in-out 3}.lab-event.broken{background:rgba(224,82,77,.18);border-color:#e0524d}.lab-result{margin-top:14px;padding:16px;border-radius:12px;border:1px solid rgba(228,183,66,.5);background:rgba(228,183,66,.08)}.lab-result h4{margin:0 0 8px}.lab-result strong{font-size:1.4rem}.lab-factory.smoking{filter:grayscale(.35);box-shadow:0 0 0 2px rgba(230,110,65,.6),0 0 28px rgba(230,110,65,.3)}.lab-factory.broken{filter:grayscale(1);opacity:.7}.lab-factory.smoking:after{content:'〰 〰 〰';position:absolute;right:8%;top:4%;font-size:2rem;color:#b7b7b7;letter-spacing:4px;animation:labSmoke .6s infinite alternate}.lab-factory{position:relative}.lab-slider input[type=range]{accent-color:#e4b742}.lab-controls button:disabled{opacity:.45;cursor:not-allowed}@keyframes labPulse{50%{transform:scale(1.01)}}@keyframes labSmoke{to{transform:translateY(-9px);opacity:.5}}@media(max-width:760px){.lab-game-top{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-goal-card strong{font-size:1.35rem}}
 </style>
+
+<style id="lab-dashboard-fit-fix">
+/* Compact control-room layout: keep the core game readable without dashboard scrolling. */
+#factory-lab{max-width:1500px;margin-inline:auto}
+#factory-lab .lab-head{margin-bottom:8px;gap:12px}
+#factory-lab .lab-head h3{margin:2px 0;font-size:clamp(1.25rem,2vw,1.75rem)}
+#factory-lab .lab-head p{margin:3px 0;font-size:.82rem}
+#factory-lab .lab-howto{padding:10px 14px;margin:8px 0;font-size:.82rem;line-height:1.35}
+#factory-lab .lab-howto ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 22px;margin:5px 0;padding-left:20px}
+#factory-lab .lab-howto li{padding-right:4px}
+#factory-lab .lab-howto p{margin:5px 0 0}
+#factory-lab .lab-game-top{gap:8px;margin:8px 0}
+#factory-lab .lab-goal-card{padding:8px 10px;border-radius:10px}
+#factory-lab .lab-goal-card strong{font-size:clamp(1.15rem,1.8vw,1.5rem);margin:3px 0}
+#factory-lab .lab-goal-card small{font-size:.72rem;line-height:1.25}
+#factory-lab .lab-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:10px;align-items:start}
+#factory-lab .lab-panel{padding:12px;min-width:0}
+#factory-lab .lab-panel h4{margin:0 0 4px;font-size:1rem}
+#factory-lab .lab-panel>p{margin:0 0 7px;font-size:.76rem;line-height:1.25}
+#factory-lab .lab-factory{height:74px;min-height:74px;margin:4px 0 8px;overflow:hidden}
+#factory-lab .lab-machines{transform:scale(.82);transform-origin:center center}
+#factory-lab .lab-slider{display:block;margin:7px 0;padding:0}
+#factory-lab .lab-slider>span:first-child{display:flex;justify-content:space-between;gap:8px;font-size:.83rem;line-height:1.2}
+#factory-lab .lab-slider .lab-note{display:block;font-size:.7rem;line-height:1.2;margin:2px 0}
+#factory-lab .lab-slider input[type=range]{width:100%;height:16px;margin:0;display:block}
+#factory-lab .lab-controls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+#factory-lab .lab-controls button{padding:8px 11px;font-size:.82rem}
+#factory-lab .lab-status,#factory-lab .lab-next-action,#factory-lab .lab-event{margin-top:6px;padding:8px 10px;font-size:.78rem;line-height:1.25}
+#factory-lab .lab-next-action span{display:block;margin-top:2px}
+#factory-lab .lab-metrics-wide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#factory-lab .lab-metric{min-width:0;padding:8px;border-radius:9px}
+#factory-lab .lab-metric>span{font-size:.7rem;line-height:1.2;display:block}
+#factory-lab .lab-metric strong{display:block;font-size:1.15rem;line-height:1.2;margin:3px 0;overflow-wrap:anywhere}
+#factory-lab .lab-metric small{font-size:.66rem;line-height:1.2;display:block}
+#factory-lab .lab-meter{height:5px;margin-top:4px}
+#factory-lab .lab-result{margin-top:8px;padding:10px;font-size:.82rem}
+#factory-lab .lab-result p{margin:5px 0}
+@media(min-width:1000px) and (min-height:780px){#factory-lab{font-size:.95rem}#factory-lab .lab-grid{gap:10px}}
+@media(max-width:999px){#factory-lab .lab-grid{grid-template-columns:1fr}#factory-lab .lab-metrics-wide{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){#factory-lab .lab-howto ol{grid-template-columns:1fr}#factory-lab .lab-game-top{grid-template-columns:repeat(2,minmax(0,1fr))}#factory-lab .lab-metrics-wide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-height:850px) and (min-width:1000px){#factory-lab .lab-howto{padding:7px 12px}#factory-lab .lab-howto li:nth-child(n+4){display:none}#factory-lab .lab-factory{height:56px;min-height:56px}#factory-lab .lab-slider{margin:5px 0}#factory-lab .lab-slider .lab-note{display:none}#factory-lab .lab-metric small{font-size:.62rem}}
+</style>
+
 </head>
 <body>
 <div class="topline"></div>
@@ -782,7 +825,7 @@ $('#mF').onclick=()=>ans(1);$('#mM').onclick=()=>ans(0);myth();
 (()=>{
  const $=id=>document.getElementById(id);if(!$('factory-lab'))return;
  const speed=$('labSpeed'),cool=$('labCooling'),lube=$('labLube'),qc=$('labQualitySet');
- let running=false,ended=false,units=0,energy=0,health=100,temp=35,lives=3,remaining=90,elapsed=0,rejects=0,downtime=0,blasts=0,warningSeconds=0,tickTimer=null,goodHistory=0;
+ let running=false,ended=false,units=0,energy=0,health=100,temp=35,lives=3,remaining=90,elapsed=0,rejects=0,downtime=0,blasts=0,warningSeconds=0,tickTimer=null,goodHistory=0,lastClockAt=0,carryMs=0;
  const TARGET=100;
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
  const fmtTime=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
@@ -793,8 +836,8 @@ $('#mF').onclick=()=>ans(1);$('#mM').onclick=()=>ans(0);myth();
  function updateLeverLabels(){ $('labSpeedVal').textContent=speed.value;$('labCoolingVal').textContent=cool.value;$('labLubeVal').textContent=lube.value;$('labQualitySetVal').textContent=qc.value; }
  function advise(){let msg='';if(ended)msg='Shift ended. Press Restart game to try a different strategy.';else if(!running&&elapsed===0)msg='Begin at 60% speed, 85% cooling, 70% lubrication and 70% quality control. Watch temperature and adjust early.';else if(temp>=95)msg='URGENT: reduce production speed and raise cooling now. Temperature is near the danger threshold.';else if(temp>=82)msg='Heat is building. Lower speed a little or increase cooling before the warning threshold.';else if(health<65)msg='Machine health is low. Raise lubrication and use a gentler speed to reduce wear.';else if(units>=TARGET)msg='Target achieved! Review your score and the condition you left the machine in.';else if(remaining<20)msg='Less than 20 seconds left. Raise speed carefully, but keep enough cooling to avoid a blast.';else msg='Balance speed against cooling. Keep lubrication above 55% and quality control around 65–80%.';$('labNextAction').innerHTML='<b>What should I do next?</b><span>'+msg+'</span>'}
  function render(){updateLeverLabels();$('labUnits').textContent=Math.floor(units);$('labGoalBar').style.width=clamp(units/TARGET*100,0,100)+'%';$('labGoalText').textContent=units>=TARGET?'Target achieved!':Math.max(0,TARGET-Math.floor(units))+' good units still needed';$('labTime').textContent=fmtTime(remaining);$('labLives').textContent=Array.from({length:3},(_,i)=>i<lives?'♥':'♡').join(' ');$('labLives').style.color=lives===1?'#e0524d':lives===2?'#e4b742':'#4ac28a';$('labTemp').textContent=Math.round(temp)+'°C';$('labTempBar').style.width=clamp(temp/125*100,0,100)+'%';$('labTempBar').style.background=temp>=100?'#e0524d':temp>=82?'#e4b742':'#4ac28a';$('labTempNote').textContent=temp>=100?'CRITICAL — blast imminent':temp>=82?'Hot — reduce load':'Normal operating range';$('labHealth').textContent=Math.round(health)+'%';$('labHealthBar').style.width=health+'%';$('labHealthBar').style.background=health<40?'#e0524d':health<70?'#e4b742':'#4ac28a';const eff=calcEfficiency();$('labEfficiency').textContent=eff+'%';$('labOeeBar').style.width=eff+'%';$('labRate').textContent=running?((+speed.value/100)*(.65+(+qc.value/100)*.35)*Math.max(.1,health/100)).toFixed(2):'0.0';$('labEnergy').textContent=energy.toFixed(1);$('labQuality').textContent=(units+rejects>0?units/(units+rejects)*100:98).toFixed(1)+'%';$('labRejects').textContent=Math.floor(rejects);$('labDowntime').textContent=downtime+' s';$('labBlasts').textContent=blasts;$('labLiveText').textContent=ended?'SHIFT OVER':running?'SHIFT IN PROGRESS':elapsed?'SHIFT PAUSED':'READY FOR SHIFT';$('labDot').style.background=ended?'#e0524d':running?'#4ac28a':'#8a969d';['labM1','labM2','labM3'].forEach((id,i)=>{$(id).classList.toggle('active',running&&!ended);$(id).classList.toggle('fault',temp>=100&&i===1)});$('labFactory').classList.toggle('smoking',warningSeconds>0);$('labFactory').classList.toggle('broken',ended&&lives===0);advise()}
- function finish(win,reason){running=false;ended=true;clearInterval(tickTimer);tickTimer=null;const final=score();const result=$('labResult');result.hidden=false;result.innerHTML='<h4>'+(win?'🏁 Shift completed!':'🛑 Shift failed')+'</h4><p>'+reason+'</p><strong>Final score: '+final+' points</strong><p>Good units: '+Math.floor(units)+' / '+TARGET+' · Time left: '+fmtTime(remaining)+' · Machine health: '+Math.round(health)+'% · Efficiency: '+calcEfficiency()+'% · Rejected units: '+Math.floor(rejects)+' · Blast events: '+blasts+'</p><p>'+(win?'Try to beat your score without sacrificing machine health or energy efficiency.':'Restart and use the levers more actively. When heat climbs, act before the 2-second countdown ends.')+'</p>';$('labStart').disabled=true;$('labStop').disabled=true;setStatus(win?'Target complete. Your final score is ready.':'Game over. Restart to try again.',win?'good':'bad');if(!win&&lives===0)setEvent('💥 COMPLETE BREAKDOWN — all 3 lives lost. The shift has ended.','broken');render()}
- function blast(){warningSeconds=0;blasts++;lives--;health=clamp(health-24,0,100);temp=78;downtime+=3;running=false;setEvent('💥 Mild simulated blast + smoke! One life lost. Reduce speed and improve cooling before restarting production.','smoke');setStatus('Blast event! You lost one life and the line has paused. Adjust the levers, then press Resume shift.','bad');$('labStart').textContent='▶ Resume shift';$('labStart').disabled=false;$('labStop').disabled=true;$('labFactory').classList.add('smoking');if(lives<=0){health=0;finish(false,'The third blast caused complete machine breakdown.');return}render()}
+ function finish(win,reason){running=false;ended=true;lastClockAt=0;carryMs=0;clearInterval(tickTimer);tickTimer=null;const final=score();const result=$('labResult');result.hidden=false;result.innerHTML='<h4>'+(win?'🏁 Shift completed!':'🛑 Shift failed')+'</h4><p>'+reason+'</p><strong>Final score: '+final+' points</strong><p>Good units: '+Math.floor(units)+' / '+TARGET+' · Time left: '+fmtTime(remaining)+' · Machine health: '+Math.round(health)+'% · Efficiency: '+calcEfficiency()+'% · Rejected units: '+Math.floor(rejects)+' · Blast events: '+blasts+'</p><p>'+(win?'Try to beat your score without sacrificing machine health or energy efficiency.':'Restart and use the levers more actively. When heat climbs, act before the 2-second countdown ends.')+'</p>';$('labStart').disabled=true;$('labStop').disabled=true;setStatus(win?'Target complete. Your final score is ready.':'Game over. Restart to try again.',win?'good':'bad');if(!win&&lives===0)setEvent('💥 COMPLETE BREAKDOWN — all 3 lives lost. The shift has ended.','broken');render()}
+ function blast(){warningSeconds=0;blasts++;lives--;health=clamp(health-24,0,100);temp=78;downtime+=3;running=false;lastClockAt=0;carryMs=0;setEvent('💥 Mild simulated blast + smoke! One life lost. Reduce speed and improve cooling before restarting production.','smoke');setStatus('Blast event! You lost one life and the line has paused. Adjust the levers, then press Resume shift.','bad');$('labStart').textContent='▶ Resume shift';$('labStart').disabled=false;$('labStop').disabled=true;$('labFactory').classList.add('smoking');if(lives<=0){health=0;finish(false,'The third blast caused complete machine breakdown.');return}render()}
  function tick(){if(!running||ended)return;elapsed++;remaining=Math.max(0,90-elapsed);const v=+speed.value/100,c=+cool.value/100,l=+lube.value/100,q=+qc.value/100;
    // Temperature is driven mainly by speed; cooling counters heat. Very aggressive settings quickly reach the warning threshold.
    temp+=v*13.2-c*8.4+(1-l)*2.0;temp=clamp(temp,25,130);
@@ -802,9 +845,20 @@ $('#mF').onclick=()=>ans(1);$('#mM').onclick=()=>ans(0);myth();
    const raw=(.58+v*1.05)*(1-Math.max(0,q-.72)*.12);const quality=clamp(.88+q*.12-(v>.85?(v-.85)*.42:0)-(health<55?.08:0),.55,.995);const made=raw*quality;units+=made;rejects+=raw-made;energy+=.018+v*.055+c*.025+l*.008+q*.006;
    if(temp>=100){if(warningSeconds===0){warningSeconds=2;setEvent('🌡️ OVERHEATING WARNING — 2 seconds to act! Lower speed and/or increase cooling now.','warning');setStatus('Overheating warning! The machine will suffer a blast in 2 seconds unless the temperature drops below 100°C.','bad')}else{warningSeconds--;if(warningSeconds<=0&&temp>=100){render();blast();return}}}else if(warningSeconds>0){warningSeconds=0;setEvent('🟢 You caught the overheating in time. Keep monitoring temperature.');setStatus('Temperature recovered before the blast. Good intervention.','good')}else if(temp>=82){setEvent('🟡 Heat is rising. Consider reducing speed or increasing cooling.','warning')}else if(blasts===0){setEvent('🟢 Machine running normally. Adjust levers to meet the target efficiently.')}
    if(health<=0){finish(false,'Machine health reached zero after severe wear.');return}if(units>=TARGET){units=TARGET;finish(true,'You produced 100 good units before the deadline. Your score rewards speed, efficiency, quality and remaining machine health.');return}if(remaining<=0){finish(false,'Time ran out before the factory completed 100 good units.');return}render()}
- function start(){if(ended)return;running=true;$('labStart').disabled=true;$('labStop').disabled=false;$('labStart').textContent='▶ Shift running';if(!tickTimer)tickTimer=setInterval(tick,1000);setStatus('Shift running — adjust the levers while watching the temperature.');render()}
- function pause(){if(!running)return;running=false;$('labStart').disabled=false;$('labStart').textContent='▶ Resume shift';$('labStop').disabled=true;setStatus('Shift paused. Your remaining time is saved.');render()}
- function reset(){clearInterval(tickTimer);tickTimer=null;running=false;ended=false;units=0;energy=0;health=100;temp=35;lives=3;remaining=90;elapsed=0;rejects=0;downtime=0;blasts=0;warningSeconds=0;speed.value=60;cool.value=85;lube.value=70;qc.value=70;$('labStart').disabled=false;$('labStart').textContent='▶ Start shift';$('labStop').disabled=true;$('labResult').hidden=true;$('labFactory').classList.remove('smoking','broken');setEvent('🟢 Machine ready — no active warning.');setStatus('Ready. Set your levers, then press Start shift.');render()}
+ function heartbeat(){
+   const now=Date.now();
+   if(!running||ended){lastClockAt=now;carryMs=0;return;}
+   if(!lastClockAt){lastClockAt=now;return;}
+   carryMs+=Math.max(0,now-lastClockAt);lastClockAt=now;
+   // Simulate one production second for each full second of real running time.
+   // If a browser stalls briefly, catch up instead of freezing the countdown.
+   let guard=0;
+   while(carryMs>=1000&&running&&!ended&&guard<10){carryMs-=1000;tick();guard++;}
+   if(running&&!ended)render();
+ }
+ function start(){if(ended)return;running=true;lastClockAt=Date.now();carryMs=0;$('labStart').disabled=true;$('labStop').disabled=false;$('labStart').textContent='▶ Shift running';if(!tickTimer)tickTimer=setInterval(heartbeat,100);setStatus('Shift running — adjust the levers while watching the temperature. The timer is now running.');render()}
+ function pause(){if(!running)return;running=false;lastClockAt=0;carryMs=0;$('labStart').disabled=false;$('labStart').textContent='▶ Resume shift';$('labStop').disabled=true;setStatus('Shift paused. The timer is stopped; resume when ready.');render()}
+ function reset(){clearInterval(tickTimer);tickTimer=null;running=false;ended=false;units=0;energy=0;health=100;temp=35;lives=3;remaining=90;elapsed=0;rejects=0;downtime=0;blasts=0;warningSeconds=0;lastClockAt=0;carryMs=0;speed.value=60;cool.value=85;lube.value=70;qc.value=70;$('labStart').disabled=false;$('labStart').textContent='▶ Start shift';$('labStop').disabled=true;$('labResult').hidden=true;$('labFactory').classList.remove('smoking','broken');setEvent('🟢 Machine ready — no active warning.');setStatus('Ready. Set your levers, then press Start shift.');render()}
  $('labStart').addEventListener('click',start);$('labStop').addEventListener('click',pause);$('labReset').addEventListener('click',reset);[speed,cool,lube,qc].forEach(el=>el.addEventListener('input',()=>{updateLeverLabels();render()}));reset();
 })();</script>
 </body>

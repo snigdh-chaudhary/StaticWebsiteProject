@@ -348,7 +348,7 @@ body:has(#gtPanel:not([hidden])) #g40t{display:none}
 .sc-e{font-size:4.6rem;text-align:center}.sc-s h4{margin:0 0 6px;font:800 1.35rem var(--serif);color:#fff}.sc-s p{margin:6px 0 10px;max-width:60ch}
 .sc-t{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:999px;background:rgba(77,179,230,.2);color:#8fd0f3;margin:2px 4px 0 0}
 @media(max-width:760px){.np-cols{grid-template-columns:1fr}.np-side{border:0;padding:0}.sc-s{grid-template-columns:1fr}.sc-e{font-size:3rem}}
-@media(prefers-reduced-motion:reduce){.ar *,.fg *{animation-duration:.01s!important;transition-duration:.01s!important}}
+@media(prefers-reduced-motion:reduce){.ar *,.fg *{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}}
 </style>
 </head>
 <body>
@@ -443,10 +443,10 @@ body:has(#gtPanel:not([hidden])) #g40t{display:none}
     <div class="fg-btns"><button class="fg-btn" id="fgTw" title="Digital twin: preview your heat 10 s ahead">🔮 Twin</button><button class="fg-btn" id="fgPause">❚❚ Pause</button><button class="fg-btn" id="fgMute" aria-label="Sound on or off">🔊</button></div></div>
     <div class="fg-main">
       <div class="fg-left"><div class="fg-stage" id="fgStage">
-        <svg viewBox="0 0 420 260" role="img" aria-label="Factory line: assemble, process, inspect"><rect width="420" height="260" fill="#12171b"/><rect y="214" width="420" height="46" fill="#1b2228"/><rect x="8" y="196" width="404" height="16" rx="8" fill="#3a444c"/><line class="belt" x1="14" y1="204" x2="406" y2="204" stroke="#79858f" stroke-width="3" stroke-dasharray="11 11"/>
-        <g class="box" style="animation-delay:0s"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="box" style="animation-delay:calc(var(--bx,4s)*-.25)"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="box" style="animation-delay:calc(var(--bx,4s)*-.5)"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="box" style="animation-delay:calc(var(--bx,4s)*-.75)"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g>
+        <svg viewBox="0 0 420 260" role="img" aria-label="Factory line: assemble, process, inspect"><rect width="420" height="260" fill="#12171b"/><rect y="214" width="420" height="46" fill="#1b2228"/><rect x="8" y="196" width="404" height="16" rx="8" fill="#3a444c"/><line id="fgBelt" x1="14" y1="204" x2="406" y2="204" stroke="#79858f" stroke-width="3" stroke-dasharray="11 11"/>
+        <g class="fgb"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="fgb"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="fgb"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g><g class="fgb"><rect y="178" width="24" height="18" rx="3" fill="#e4b742"/></g>
         <rect x="24" y="116" width="84" height="80" rx="8" fill="#2d3740"/><circle cx="66" cy="148" r="14" fill="none" stroke="#9aa6af" stroke-width="5"/><path d="M66 134 L92 108 L108 118" stroke="#9aa6af" stroke-width="6" fill="none" stroke-linecap="round"/><text x="66" y="188" fill="#c8d0d6" font-size="11" text-anchor="middle">Assemble</text>
-        <rect x="250" y="22" width="20" height="38" fill="#4a555e"/><rect class="mach" x="150" y="56" width="124" height="140" rx="10"/><circle class="gear" cx="212" cy="116" r="30" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="9" stroke-dasharray="10 7"/><circle cx="212" cy="116" r="14" fill="#171b20"/><text x="212" y="186" fill="#fff" font-size="11" text-anchor="middle">Process</text>
+        <rect x="250" y="22" width="20" height="38" fill="#4a555e"/><rect class="mach" x="150" y="56" width="124" height="140" rx="10"/><circle id="fgGear" cx="212" cy="116" r="30" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="9" stroke-dasharray="10 7"/><circle cx="212" cy="116" r="14" fill="#171b20"/><text x="212" y="186" fill="#fff" font-size="11" text-anchor="middle">Process</text>
         <rect x="316" y="116" width="84" height="80" rx="8" fill="#2d3740"/><rect x="326" y="126" width="64" height="30" rx="4" fill="#0f1215"/><line class="scan" x1="332" y1="141" x2="384" y2="141" stroke="#e8665f" stroke-width="2"/><text x="358" y="188" fill="#c8d0d6" font-size="11" text-anchor="middle">Inspect</text></svg>
         <div class="fg-alert" id="fgAlert"></div><div class="fg-smoke" id="fgSmoke"></div><div class="fg-flash" id="fgFlash"></div><div class="fg-pop" id="fgPop"></div>
         <div class="fg-fuse" id="fgFuse">Blast fuse<div class="fg-bar"><i id="fgFuseBar"></i></div></div></div>
@@ -931,9 +931,10 @@ const LEV=[['s','Conveyor speed','more units, more heat','#e4b742'],['p','Robot 
 let twin=false,twinUsed=false,diff='std',S,raf=0,lt=0,best=0,ac=null,mute=false,state='intro';
 $('fgLev').innerHTML=LEV.map(([i,n,h,c])=>`<div class="fg-lev" style="--ac:${c}"><div class="fg-lh"><b>${n}</b><small>${h}</small><output id="fgo_${i}"></output></div>`+(i==='k'?`<div class="fg-trk"><i class="fg-zone" id="fgZone"></i><input id="fgi_k" type="range" min="0" max="100" aria-label="${n}"></div>`:`<input id="fgi_${i}" type="range" min="0" max="100" aria-label="${n}">`)+`</div>`).join('');
 LEV.forEach(([i])=>$('fgi_'+i).addEventListener('input',e=>{S[i]=+e.target.value;draw()}));
+const BX=[...document.querySelectorAll('#fgStage .fgb')];
 function ov(h){const o=$('fgOv');o.innerHTML=h;o.hidden=false;o.scrollTop=0}
 function predict(){let h=S.h,f=0,L=S.stall>0?0:(S.s+S.p)/200;for(let t=0;t<10;t+=.2){h=cl(h+(20*L*L*S.cfg.heat+.34*S.mis*L-(.1*S.c+1.2)*(h/100+.3))*.2,20,100);if(h>=85)f+=.2;if(f>=2)return[h,t]}return[h,0]}
-function init(){twinUsed=twin;const C=CFG[diff];S={cfg:C,t:0,T:C.time,s:0,p:0,c:0,k:0,kc:50,kt:50,h:25,fuse:0,stall:0,lives:3,hp:100,made:0,good:0,E:0,smooth:0,beep:0,pa:0,L:0,mis:0,rate:0,y:1,kW:0};$('fgStage').className='fg-stage';$('fgSmoke').innerHTML='';draw()}
+function init(){twinUsed=twin;const C=CFG[diff];S={cfg:C,t:0,T:C.time,s:0,p:0,c:0,k:0,kc:50,kt:50,h:25,fuse:0,stall:0,lives:3,hp:100,made:0,good:0,E:0,smooth:0,beep:0,pa:0,L:0,mis:0,rate:0,y:1,kW:0,bp:0,xp:0,gp:0};$('fgStage').className='fg-stage';$('fgSmoke').innerHTML='';draw()}
 function intro(){state='intro';cancelAnimationFrame(raf);init();const C=CFG[diff];
 ov(`<div class="fg-card"><h3>🏭 Mission: rush order</h3><p>You run the factory. Make enough good units before the timer ends, and <b>keep adjusting the four levers all game</b>. Standing still will break the machine.</p><ol class="fg-steps">
 <li><b>🎯 Goal.</b> Reach the unit target before time runs out. The earlier you finish, the higher your score.</li>
@@ -953,7 +954,7 @@ function loop(ts){if(state!=='run')return;const dt=Math.min(.1,(ts-lt)/1000||0);
 function step(dt){const C=S.cfg;S.t+=dt;
 const d=S.kt-S.kc;S.kc+=Math.sign(d)*Math.min(Math.abs(d),C.drift*dt);if(Math.abs(d)<.5)S.kt=15+Math.random()*70;
 const tr=S.stall>0;if(tr)S.stall=Math.max(0,S.stall-dt);
-const L=tr?0:(S.s+S.p)/200,mis=Math.max(0,Math.abs(S.k-S.kc)-10);S.L=L;S.mis=mis;
+const L=tr?0:(S.s+S.p)/200,mis=Math.max(0,Math.abs(S.k-S.kc)-10);S.L=L;S.mis=mis;const v=tr?0:S.s/100;S.bp+=dt*v*130;S.xp+=dt*v*245;S.gp+=dt*L*520;
 const gain=20*L*L*C.heat+.34*mis*L,loss=(.1*S.c+1.2)*(S.h/100+.3);S.h=cl(S.h+(gain-loss)*dt,20,100);
 const y=cl(.985-mis*.006-(S.h>=70?.08:0)-Math.max(0,L-.85)*.6,.3,1);S.y=y;S.rate=1.45*L*y;S.made+=1.45*L*dt;S.good+=S.rate*dt;
 S.kW=20+(tr?0:.5*S.s+.7*S.p)+.35*S.c;S.E+=S.kW*dt/60;
@@ -989,7 +990,7 @@ $('fgHeat').textContent=Math.round(h)+'%';$('fgHeatBar').style.width=h+'%';$('fg
 $('fgHp').textContent=Math.round(S.hp)+'%';$('fgHpBar').style.width=S.hp+'%';$('fgHpBar').style.background=S.hp>60?'#3fb984':S.hp>30?'#e4b742':'#e8665f';
 LEV.forEach(([i])=>{const e=$('fgi_'+i);if(+e.value!==S[i])e.value=S[i];e.style.setProperty('--v',S[i]);$('fgo_'+i).textContent=Math.round(S[i])+'%'+(i==='k'?(S.mis===0?' ✅':' ⚠ off '+Math.round(S.mis)):'')});
 $('fgZone').style.setProperty('--zl',S.kc-10);
-const st=$('fgStage');st.style.setProperty('--hc',`hsl(${Math.round(205-cl((h-35)/55,0,1)*200)} 50% ${34+cl((h-60)/40,0,1)*10}%)`);st.style.setProperty('--gs',(2.4-S.s*.02).toFixed(2)+'s');st.style.setProperty('--bs',(1.8-S.s*.0145).toFixed(2)+'s');st.style.setProperty('--bx',(6-S.s*.04).toFixed(2)+'s');
+const st=$('fgStage');st.style.setProperty('--hc',`hsl(${Math.round(205-cl((h-35)/55,0,1)*200)} 50% ${34+cl((h-60)/40,0,1)*10}%)`);$('fgBelt').setAttribute('stroke-dashoffset',-(S.bp%22));$('fgGear').setAttribute('transform','rotate('+(S.gp%360).toFixed(1)+' 212 116)');BX.forEach((b,i)=>b.setAttribute('transform','translate('+(((S.xp+i*122.5)%490)-40).toFixed(1)+' 0)'));
 st.classList.toggle('trip',tr);st.classList.toggle('warn',warm&&!hot&&!tr);st.classList.toggle('danger',hot||tr);
 let m,c;if(tr){m=`🔧 Line tripped by the blast. Restarting in ${S.stall.toFixed(1)} s`;c='#7a5a12'}else if(hot){m=`💨 SMOKING: blast in ${Math.max(0,2-S.fuse).toFixed(1)} s. Cut power or add coolant`;c='#b3302b'}else if(warm){m='⚠ Overheating: warning only. Act before it smokes';c='#a8741a'}else if(S.mis>0){m='🎯 Calibration is outside the window: lower quality, extra heat';c='#8a6d1d'}else{m='✅ Running smoothly';c='#1f6b4f'}
 const a=$('fgAlert');a.textContent=m;a.style.background=c;$('fgFuse').classList.toggle('on',S.fuse>0&&hot);$('fgFuseBar').style.width=Math.min(100,S.fuse/2*100)+'%';

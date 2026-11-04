@@ -321,8 +321,8 @@
 .rg-card{background:#0f1215;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 14px;margin:8px 0}.rg-card.hit{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}.rg-card.dim{opacity:.45}.rg-card h4{margin:6px 0 2px;color:#fff}
 .rg-b{display:inline-block;font-size:.72rem;font-weight:700;border-radius:999px;padding:2px 9px;background:rgba(77,179,230,.2);color:#8fd0f3;margin-right:8px}.rg-opt{display:flex;gap:8px;align-items:flex-start;margin:6px 0;font-size:.9rem;cursor:pointer}
 @media print{#g40t,#g40p,#g40n,#g40q{display:none!important}}
-#g40t{right:auto;left:10px;top:50%;bottom:auto;transform:translateY(-50%)}#g40t button{width:38px;height:38px;opacity:.92}
-@media(max-width:1300px){#g40t{top:auto;transform:none;bottom:84px}}
+#g40t{right:18px;left:auto;top:auto;transform:none;bottom:calc(86px + env(safe-area-inset-bottom,0px))}#g40t button{width:38px;height:38px;opacity:.92}
+body:has(#gtPanel:not([hidden])) #g40t{display:none}
 #idxList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
 #idxList>.idx-chapter{margin:0;border-top:4px solid var(--dark)}#idxList>.idx-chapter:nth-child(3n+2){border-top-color:var(--red)}#idxList>.idx-chapter:nth-child(3n){border-top-color:var(--gold)}
 #idxList>.idx-chapter[open],#idxList>.idx-empty{grid-column:1/-1}
@@ -1169,6 +1169,7 @@ const r=s.getRangeAt(0).getBoundingClientRect(),sec=el.closest('section[id]');cu
 pop.onmousedown=e=>e.preventDefault();pop.onclick=()=>{if(cur){N.unshift(cur);sv();render();dr.classList.add('on');cur=null}pop.style.display='none';getSelection().removeAllRanges()};
 const L=[...document.querySelectorAll('header a[href^="#"],nav a[href^="#"]')].filter(a=>a.hash.length>1&&document.getElementById(a.hash.slice(1)));
 if(L.length){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)L.forEach(a=>a.classList.toggle('g40-act',a.hash==='#'+en.target.id))}),{rootMargin:'-35% 0px -60% 0px'});[...new Set(L.map(a=>a.hash.slice(1)))].forEach(id=>io.observe(document.getElementById(id)))}
+const place=()=>{const f=document.querySelector('.gt-fab');if(f){const r=f.getBoundingClientRect();if(r.height)tb.style.bottom=(innerHeight-r.top+10)+'px'}};place();addEventListener('resize',place);setTimeout(place,600);
 render();
 })();
 
